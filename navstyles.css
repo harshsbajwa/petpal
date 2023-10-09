@@ -74,8 +74,12 @@ nav .profile-type{
 }
 
 nav .profile-edit{
- margin-top: 20%;   
+ margin-top: 20%;
 }
+
+nav .sign-out{
+    margin-top: 5%;
+   }
 
 
 
