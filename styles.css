@@ -1,0 +1,39 @@
+body {
+    background-color: #D9D9D9; 
+    background-image: url('images/istockphoto-1397600724-612x612.jpg');
+}
+
+.display-6 {
+    margin-right: 0.5rem;
+    font-size: 2rem;
+}
+
+.container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#flex {
+    display: flex;
+    
+}
+
+.btn-danger {
+    background-color: #FF5543;
+    margin: 0.2rem;
+}
+
+.buttonholder {
+    display: flex;
+    
+}
+
+img {
+    padding: 1rem;
+}
+
+.card {
+    margin: 1rem;
+}
