@@ -56,6 +56,21 @@ img {
     
 }
 
+#HomeSearch {
+    margin-bottom: 10rem;
+}
+
+#welcome {
+    display: flex;
+    justify-content: center;
+    height: 30rem;
+    
+}
+
+#bigtext {
+    font-size: 100px;
+}
+
 #centredcardbody {
     display: flex;
     align-items: center;
