@@ -97,13 +97,18 @@ nav .sign-out{
     body{
         padding: 0px 25%;
     }
+
+    image {
+        width: 80%;
+        height: auto
+    }
  }
 
  .image {
     margin-left: auto;
     margin-right: auto;
-    width: 500px;
-    height: 375px;
+    width: 60%;
+    height: auto;
  }
 
  .mx-auto {
