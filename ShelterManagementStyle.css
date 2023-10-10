@@ -1,10 +1,14 @@
 body {
   padding: 0px 138px;
-  background-color: #ffeded;
+  background-image: url('istockphoto-1397600724-612x612.jpg');
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .navbar {
-  padding: 60px 0px;
+  padding: 60px 138px;
+  background-color: white;
+  
 }
 
 .nav-container {
@@ -105,7 +109,9 @@ nav .sign-out {
 }
 
 .container {
-  padding-bottom: 40px;
+  margin-bottom: 40px;
+  background-color: white;
+  margin-top: 32px;
 }
 
 .row {
