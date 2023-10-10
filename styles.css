@@ -87,6 +87,10 @@ img {
     display: flex;
 }
 
+#redlink {
+    color: #FF5543;
+}
+
 .navbar{
     padding: 60px 138px;
     background-color: white;

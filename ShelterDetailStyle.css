@@ -69,6 +69,7 @@ nav .profile-name{
     font-weight: bold;
     padding: 4px 16px 0 16px;
     padding-bottom: 0px;
+    white-space: nowrap;
 }
 
 nav .profile-type{
@@ -124,6 +125,7 @@ nav .sign-out{
     margin-bottom: 40px;
     background-color: white;
     margin-top: 32px;
+    border-radius: 20px;
  }
 
  .pets {
