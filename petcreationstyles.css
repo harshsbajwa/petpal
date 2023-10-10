@@ -129,10 +129,6 @@ h1 {
   padding-right: 5px;
 }
 
-.form-group::placeholder {
-  color: black;
-}
-
 .btn {
   background-color: #FF5543;
   color: #FFEDED;
