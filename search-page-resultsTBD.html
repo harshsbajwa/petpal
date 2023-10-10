@@ -60,64 +60,85 @@
             </div>    
         </div>
 
-        <div class="buttonholder">
+        <div id="sortandfilter">
+          <div class="buttonholder">
 
-            <h2 class="display-6">Filters:</h2>
+              <h2 class="display-6">Filters:</h2>
 
-            <div class="dropdown">
-                <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" >Location</a>
+              <div class="dropdown">
+                  <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" >Location</a>
+              
+                  <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" >Action</a></li>
+                  <li><a class="dropdown-item" >Another action</a></li>
+                  <li><a class="dropdown-item" >Something else here</a></li>
+                  </ul>
+              </div>
+
+              <div class="dropdown">
+                  <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" >Breed</a>
+                  <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" >Action</a></li>
+                  <li><a class="dropdown-item" >Another action</a></li>
+                  <li><a class="dropdown-item" >Something else here</a></li>
+                  </ul>
+              </div>
+
+              <div class="dropdown">
+                  <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" >Age</a>
+                  <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" >Action</a></li>
+                  <li><a class="dropdown-item" >Another action</a></li>
+                  <li><a class="dropdown-item" >Something else here</a></li>
+                  </ul>
+              </div>
+
+              <div class="dropdown">
+                  <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" >Size</a>
+                  <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" >Action</a></li>
+                  <li><a class="dropdown-item" >Another action</a></li>
+                  <li><a class="dropdown-item" >Something else here</a></li>
+                  </ul>
+              </div>
+
+              <div class="dropdown">
+                  <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" >Colour</a>
+                  <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" >Action</a></li>
+                  <li><a class="dropdown-item" >Another action</a></li>
+                  <li><a class="dropdown-item" >Something else here</a></li>
+                  </ul>
+              </div>
+
+              <div class="dropdown">
+                  <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" >Gender</a>
+                  <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" >Action</a></li>
+                  <li><a class="dropdown-item" >Another action</a></li>
+                  <li><a class="dropdown-item" >Something else here</a></li>
+                  </ul>
+              </div>
+          </div>
+
+
+
+          <!-- <div id="searchbutton">
             
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" >Action</a></li>
-                <li><a class="dropdown-item" >Another action</a></li>
-                <li><a class="dropdown-item" >Something else here</a></li>
-                </ul>
-            </div>
 
             <div class="dropdown">
-                <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" >Breed</a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" >Action</a></li>
-                <li><a class="dropdown-item" >Another action</a></li>
-                <li><a class="dropdown-item" >Something else here</a></li>
-                </ul>
+              <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" >Sort</a>
+              <ul class="dropdown-menu">
+              <li><a class="dropdown-item" >Action</a></li>
+              <li><a class="dropdown-item" >Another action</a></li>
+              <li><a class="dropdown-item" >Something else here</a></li>
+              </ul>
             </div>
 
-            <div class="dropdown">
-                <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" >Age</a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" >Action</a></li>
-                <li><a class="dropdown-item" >Another action</a></li>
-                <li><a class="dropdown-item" >Something else here</a></li>
-                </ul>
-            </div>
+          </div> -->
 
-            <div class="dropdown">
-                <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" >Size</a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" >Action</a></li>
-                <li><a class="dropdown-item" >Another action</a></li>
-                <li><a class="dropdown-item" >Something else here</a></li>
-                </ul>
-            </div>
 
-            <div class="dropdown">
-                <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" >Colour</a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" >Action</a></li>
-                <li><a class="dropdown-item" >Another action</a></li>
-                <li><a class="dropdown-item" >Something else here</a></li>
-                </ul>
-            </div>
 
-            <div class="dropdown">
-                <a class="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown" >Gender</a>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" >Action</a></li>
-                <li><a class="dropdown-item" >Another action</a></li>
-                <li><a class="dropdown-item" >Something else here</a></li>
-                </ul>
-            </div>
         </div>
 
         <!-- <div class="buttonholder">
@@ -153,12 +174,12 @@
               <li class="list-group-item">Gender: Male</li>
               <li class="list-group-item">Colour : Gold</li>
             </ul>
-            <div class="card-body">
-                <a class="btn btn-danger" href="pet-detail-page.html" >
-                    Click here for details!
+            <div class="card-body" id="centredcardbody">
+                <a class="btn btn-danger" href="pet-detail-page.html" id="detailsbtn" >
+                    Details
                 </a>
-                <a class="btn btn-danger" href="pet-adoption-page.html" >
-                    Click here to adopt!
+                <a class="btn btn-danger" href="pet-adoption-page.html" id="adoptbtn">
+                    Adopt
                 </a>
             </div>
         </div>
@@ -176,12 +197,12 @@
               <li class="list-group-item">Gender: Male</li>
               <li class="list-group-item">Colour : Gold</li>
             </ul>
-            <div class="card-body">
-                <a class="btn btn-danger" href="pet-detail-page.html" >
-                    Click here for details!
+            <div class="card-body" id="centredcardbody">
+                <a class="btn btn-danger" href="pet-detail-page.html" id="detailsbtn" >
+                    Details
                 </a>
-                <a class="btn btn-danger" href="pet-adoption-page.html" >
-                    Click here to adopt!
+                <a class="btn btn-danger" href="pet-adoption-page.html" id="adoptbtn">
+                    Adopt
                 </a>
             </div>
         </div>

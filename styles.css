@@ -1,6 +1,8 @@
 body {
-    background-color: #D9D9D9; 
+     
     background-image: url('images/istockphoto-1397600724-612x612.jpg');
+    background-color: white
+
 }
 
 .display-6 {
@@ -30,10 +32,12 @@ body {
 .btn-danger {
     background-color: #FF5543;
     margin: 0.2rem;
+    max-width: 120px;
 }
 
 .buttonholder {
     display: flex;
+    width: 100%;
     
 }
 
@@ -52,17 +56,26 @@ img {
     
 }
 
+#centredcardbody {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
+#sortandfilter {
+    display: flex;
+    justify-content: space-between;
+}
 
-
-nav {
-    padding: 0px 138px;
-    background-color: white
+#searchbutton {
+    display: flex;
 }
 
 .navbar{
-    padding: 60px 0px;
+    padding: 60px 138px;
+    background-color: white;
+    
 }
 
 .nav-container{
@@ -141,7 +154,36 @@ nav .sign-out{
 
 
 
-@media (max-width: 992px) { 
+
+
+ @media (max-width: 768px) { 
+    body {
+        padding: 0px 20px;
+    }
+
+    .navbar {
+        margin: 0px -20px;
+    }
+
+    .buttonholder{
+        flex-direction: column;
+    }
+
+    .btn-danger {
+        width: 120px ;
+    }
+
+    #detailsbtn {
+        width: 85px;
+    }
+
+    #adoptbtn {
+        width: 80px;
+    }
+
+ }
+
+ @media (max-width: 992px) { 
     nav .profile-box {
         padding: 8px 0 8px 0;
     }
@@ -151,8 +193,3 @@ nav .sign-out{
     }
  }
 
- @media (max-width: 576px) { 
-    body{
-        padding: 0px 25%;
-    }
- }
