@@ -14,27 +14,29 @@
   <body>
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="border bg-white shadow box-area row">
-            <div class="title w-100">PetPal</div>
-            <div class="subtitle">Are you a shelter looking to put up pets for adoption? <a href="create-shelter.html">Create An Account For Your Shelter</a></div>
-            <div class="mb-4 subtitle w-100">Looking to adopt a pet? Create a user below:</div>
+            <div class="title w-100">Update PetPal Account</div>
             <form action="https://postman-echo.com/post" method="post" id="contactForm"  enctype="multipart/form-data"></form>
                 <div class="left col-md-6">                
                     <div class="row">
                         <div class="mb-3 col-6 pr-0">
                             <label for="firstName" class="form-label">First Name</label>
-                            <input type="fname" class="form-control" id="firstName" name="fname" autocomplete="given-name">
+                            <input type="fname" class="form-control" id="firstName" name="fname" autocomplete="given-name" value="JimmyBobJoe">
                         </div>
                         <div class="mb-3 col-6">
                             <label for="lastName" class="form-label">Last Name</label>
-                            <input type="lname" class="form-control" id="lastName" name="lname" autocomplete="family-name">
+                            <input type="lname" class="form-control" id="lastName" name="lname" autocomplete="family-name" value="Smith">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="emailInput" class="form-label" >Email address</label>
-                        <input type="email" class="form-control" id="emailInput" name="email" >
+                        <input type="email" class="form-control" id="emailInput" name="email" value="jimmyjoe@yahoo.ca" >
                     </div>
                     <div class="mb-3">
-                        <label for="passwordInput" class="form-label">Password</label>
+                        <label for="passwordInput" class="form-label">Old Password</label>
+                        <input type="password" class="form-control" id="opasswordInput" name="opassword" value="HelloWorld">
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordInput" class="form-label">New Password</label>
                         <input type="password" class="form-control" id="passwordInput" name="password">
                     </div>
                     <div class="mb-4">
@@ -45,15 +47,14 @@
                 <div class="right col-md-6">
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone Number</label>
-                        <input class="form-control" id=”phone” placeholder=888-888-8888 title=”XXX-XXX-XXXX” required pattern=”[0-9]{3}-[0-9]{3}-[0-9]{4}”>
+                        <input class="form-control" id=”phone” value="888-888-8888" title=”XXX-XXX-XXXX” required pattern=”[0-9]{3}-[0-9]{3}-[0-9]{4}”>
                     </div>                       
                     <div class="mb-3">
                         <label for="addressLine" class="form-label" >Street Address</label>
-                        <input type="text" class="form-control" id="addressLine" name="addressLine">
+                        <input type="text" class="form-control" id="addressLine" name="addressLine" value="72 Williams Road">
                     </div>
                     <div class="mb-3">
                         <select type="text" class="form-select" id="countryInp" name="countryInp">
-                            <option>Country</option>
                             <option>Canada</option>
                             <option>United States Of America</option>
                             <option>Mexico</option>
@@ -61,20 +62,19 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="mb-2">Additional Preferences</label>
-                        <textarea class="form-control preferences" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <textarea class="form-control preferences" id="exampleFormControlTextarea1" rows="2">I only want cute dogs!</textarea>
                     </div>     
                 </div>
                 <div class="input-group mb-3"> 
-                    <label for="inputGroupFile01" class="w-100 mb-2"> Upload a Profile Picture (Optional)</label>
+                    <label for="inputGroupFile01" class="w-100 mb-2"> Upload a New Profile Picture (Current file: Charlie.jpg)</label>
                     <input type="file" class="form-control" id="inputGroupFile01"> 
                 </div> 
                 <div class="input-group mb-3">
-                <a class="w-100" href="create-user-popup.html">
-                    <button type="submit" class="btn btn-primary w-100 fs-6" href="create-user-popup.html">Login</button>
+                <a class="w-100" href="landing-page.html">
+                    <button type="submit" class="btn btn-primary w-100 fs-6" href="landing-page.html">Make Changes</button>
                 </a>
                 </div>
             </form>
-            <small>Already have an account? <a href="landing-page.html">Log In</a></small>
         </div>
     </div>
   </body>
