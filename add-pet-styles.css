@@ -74,13 +74,23 @@ textarea.form-control {
 }
 
 
+.special{
+    box-sizing: border-box;
+    height: 82px !important;
+    resize: none;
+}
 
+.cancel{
+    background-color: #495057;
+    border-color: #495057;
+}
 
 
 @media (max-width: 768px) { 
 .left{
     padding-right: 0;
 }
+
 
 .box-area{
     margin: 1%;

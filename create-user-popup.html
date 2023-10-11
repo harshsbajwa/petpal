@@ -15,7 +15,7 @@
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="border bg-white shadow box-area row">
             <div class="title w-100">PetPal</div>
-            <div class="subtitle">Are you a shelter looking to put up pets for adoption? <a href="landing-page.html">Create An Account For Your Shelter</a></div>
+            <div class="subtitle">Are you a shelter looking to put up pets for adoption? <a href="create-shelter.html">Create An Account For Your Shelter</a></div>
             <div class="mb-4 subtitle w-100">Looking to adopt a pet? Create a user below:</div>
             <form action="https://postman-echo.com/post" method="post" id="contactForm"  enctype="multipart/form-data"></form>
                 <div class="left col-md-6">                
@@ -63,13 +63,15 @@
                         <textarea class="form-control preferences" id="exampleFormControlTextarea1" rows="2"></textarea>
                     </div>     
                 </div>
-                <div class="input-group mb-2"> 
+                <div class="input-group mb-3"> 
                     <label for="inputGroupFile01" class="w-100 mb-2"> Upload a Profile Picture (Optional)</label>
                     <input type="file" class="form-control" id="inputGroupFile01"> 
                 </div> 
                 <img class="img-fluid ppic mb-4" src="images/dog.jpg">
                 <div class="input-group mb-3">
-                    <button type="submit" class="btn btn-primary w-100 fs-6">Login</button>
+                    <a class="w-100" href="search-page.html">
+                        <button type="submit" class="btn btn-primary w-100 fs-6" href="search-page.html">Login</button>
+                    </a>
                 </div>
             </form>
             <small class="error">**ONE OF THE FIELDS WERE ENTERED INCORRECTLY**</small>

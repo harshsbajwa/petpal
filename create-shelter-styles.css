@@ -62,6 +62,10 @@ select{
     color: #495057;
 }
 
+.btn-secondary{
+    color: #495057;
+}
+
 textarea.form-control {
     box-sizing: border-box;
     height: 72px;
