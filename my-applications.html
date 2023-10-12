@@ -29,7 +29,7 @@
                   </ul>
                 </li>
                 <li class="nav-item">
-                  <a href="my-applications.html" class="nav-link">My Applications</a>
+                  <a href="#" class="nav-link">My Applications</a>
                 </li>
                 </ul>
                 <div class="dropdown profile-box">
@@ -51,26 +51,50 @@
     
 
     <div class="container mt-4" id="HomeSearch">
-        <h1 >Search</h1>
+        <h1  class="text-centre">My Applications</h1>
 
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search for pets..." aria-label="Search for pets" aria-describedby="search-button">
-            <div class="input-group-append">
-                <a class="btn btn-danger btn-lg" type="button" id="search-button" href="search-page-resultsTBD.html">Search </a>
-            </div>    
-        </div>
+<!-- Application status can either be pending, withdrawn or adopted -->
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Pet Name</th>
+                <th scope="col">ID</th>
+                <th scope="col">Application Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Max</td>
+                <td>63473</td>
+                <td>Pending</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Elmo</td>
+                <td>64574</td>
+                <td>Adopted</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry the Bird</td>
+                <td>64999</td>
+                <td>Withdrawn</td>
+              </tr>
+            </tbody>
+          </table>
+
+        
 
         
         
 
     </div>
 
-    <!-- The following div is where we will make the results showup-->
-    <!-- <div class="container mt-4" name="results-placeholder"> -->
+   
 
-      <div id="welcome">
-        <h1 id="bigtext">Welcome to Petpal!</h1>
-      </div>
+      
         
 
     </div>

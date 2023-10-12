@@ -49,6 +49,10 @@ img {
     margin: 1rem;
 }
 
+#rightjustified {
+    justify-content: right;
+}
+
 #carouselExampleAutoplaying {
     
     height: 20rem;
@@ -81,6 +85,10 @@ img {
 #sortandfilter {
     display: flex;
     justify-content: space-between;
+}
+
+#sorttag {
+    margin-right: 30px;
 }
 
 #searchbutton {
@@ -192,12 +200,22 @@ nav .sign-out{
         width: 120px ;
     }
 
+    #responsiveflex{
+        display: flex;
+        flex-direction: column;
+    }
+
     #detailsbtn {
-        width: 85px;
+        width: 80px;
     }
 
     #adoptbtn {
         width: 80px;
+    }
+
+    #bigtext {
+        font-size: 30px;
+        
     }
 
  }
@@ -209,6 +227,11 @@ nav .sign-out{
 
     nav .nav-item{
         padding-left: 0;
+    }
+
+    #bigtext {
+        font-size: 80px;
+        text-align: center;
     }
  }
 
