@@ -207,3 +207,21 @@ nav .sign-out{
     border-width: 0;
     vertical-align: middle;
 } */
+
+
+
+
+
+
+
+
+
+/* Tej made these changes: */
+img {
+    padding: 1rem;
+    height: 20rem;
+}
+
+.card {
+    margin: 1rem;
+}
