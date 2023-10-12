@@ -66,61 +66,61 @@
           <div class="form-row">
             <div class="form-group col-lg-6 col-12">
               <label for="inputPetName">Pet Name</label>
-              <input type="text" class="form-control" id="inputPetName" placeholder="John">
+              <input type="text" class="form-control" id="inputPetName" placeholder="John" required>
             </div>
             <div class="form-group col-lg-6 col-12">
               <label for="inputAge">Age</label>
-              <input type="text" class="form-control" id="inputAge" placeholder="54">
+              <input type="text" class="form-control" id="inputAge" placeholder="54" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-lg-6 col-12">
               <label for="inputPetType">Pet Type</label>
-              <select class="form-select">
+              <select class="form-select" required>
                 <option selected>Dog</option>
                 <option value="Dog">Cat</option>
               </select>
             </div>
             <div class="form-group col-lg-6 col-12">
               <label for="inputPetBreed">Pet Breed</label>
-              <input type="text" class="form-control" id="inputPetBreed" placeholder="Labrador">
+              <input type="text" class="form-control" id="inputPetBreed" placeholder="Labrador" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-lg-3 col-12">
               <label for="inputFixedBool">Fixed</label>
-              <select class="form-select">
+              <select class="form-select" required>
                 <option selected>Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
             <div class="form-group col-lg-3 col-12">
               <label for="inputVaccineBool">Vaccinated</label>
-              <select class="form-select">
+              <select class="form-select" required>
                 <option selected>Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
             <div class="form-group col-lg-3 col-12">
               <label for="inputLocation">City</label>
-              <input type="text" class="form-control" id="inputLocation" placeholder="Toronto">
+              <input type="text" class="form-control" id="inputLocation" placeholder="Toronto" required>
             </div>
             <div class="form-group col-lg-3 col-12">
               <label for="inputOrganization">Organization</label>
-              <input type="text" class="form-control" id="inputOrganization" placeholder="Toronto Humane Society">
+              <input type="text" class="form-control" id="inputOrganization" placeholder="Toronto Humane Society" required>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group col-12">
               <label for="inputMultipleImages" class="form-label">Choose up to 5 images</label>
-              <input class="form-control" type="file" id="inputFileMultiple" multiple>
+              <input class="form-control" type="file" id="inputFileMultiple" multiple required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-12">
               <label for="inputBio" class="form-label">Bio</label>
-              <textarea class="form-control"></textarea>
+              <textarea class="form-control" required></textarea>
             </div>
           </div>
           <a href="pet-detail-page.html" class="btn btn-primary mt-3" role="button">Submit</a>
