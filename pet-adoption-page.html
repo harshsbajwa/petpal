@@ -8,6 +8,47 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="header">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid nav-container">
+          <a href="search-page.html" class="navbar-brand">PetPal</a>
+          <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="search-page.html" class="nav-link active">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Notifications</a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-item">Notification 1</li>
+                <li class="dropdown-item">Notification 2</li>
+                <li class="dropdown-item">Notification 3</li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">My Applications</a>
+            </li>
+            </ul>
+            <div class="dropdown profile-box">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                Profile
+              </button>
+              <ul class="dropdown-menu dropdown-menu-lg-end">
+                <li class="profile-name">JimmyBobJoe</li>
+                <li class="profile-type">Seeker</li>
+                <li><a class="dropdown-item profile-edit" href="UserAccountUpdate.html">Edit</a></li>
+                <li><a class="dropdown-item profile-edit sign-out" href="landing-page.html">Sign Out</a></li>
+              </ul>
+            </div>
+          </div>
+          
+        </div>
+      </nav>
+  </div>
+
     <div class="container mt-4">
         <!-- <h1> Pet Adoption Form</h1>
 

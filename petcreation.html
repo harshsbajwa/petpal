@@ -1,40 +1,46 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="petcreationstyles.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <title>Pet Creation</title>
-  </head>
-  <body>
-    
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="petcreationstyles.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <title>Pet Creation</title>
+</head>
+
+<body>
+
+  <div class="header">
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid nav-container">
-        <a href="#" class="navbar-brand">PetPal</a>
+        <a href="search-page.html" class="navbar-brand">PetPal</a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="nav">
           <ul class="navbar-nav">
-          <li class="nav-item">
-            <a href="#" class="nav-link active">Home</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Notifications</a>
-            <ul class="dropdown-menu">
-              <li class="dropdown-item">Notification 1</li>
-              <li class="dropdown-item">Notification 2</li>
-              <li class="dropdown-item">Notification 3</li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">My Pets</a>
-          </li>
+            <li class="nav-item">
+              <a href="search-page.html" class="nav-link active">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Notifications</a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-item">Notification 1</li>
+                <li class="dropdown-item">Notification 2</li>
+                <li class="dropdown-item">Notification 3</li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">My Applications</a>
+            </li>
           </ul>
           <div class="dropdown profile-box">
             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
@@ -43,90 +49,90 @@
             <ul class="dropdown-menu dropdown-menu-lg-end">
               <li class="profile-name">JimmyBobJoe</li>
               <li class="profile-type">Seeker</li>
-              <li><a class="dropdown-item profile-edit" href="#">Edit</a></li>
-              <li><a class="dropdown-item profile-edit sign-out" href="#">Sign Out</a></li>
+              <li><a class="dropdown-item profile-edit" href="UserAccountUpdate.html">Edit</a></li>
+              <li><a class="dropdown-item profile-edit sign-out" href="landing-page.html">Sign Out</a></li>
             </ul>
           </div>
         </div>
-        
       </div>
     </nav>
+  </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="box">
-          <h1>Pet Creation</h1>
-          <form>
-            <div class="form-row">
-              <div class="form-group col-lg-6 col-12">
-                <label for="inputPetName">Pet Name</label>
-                <input type="text" class="form-control" id="inputPetName">
-              </div>
-              <div class="form-group col-lg-6 col-12">
-                <label for="inputAge">Age</label>
-                <input type="text" class="form-control" id="inputAge">
-              </div>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="box">
+        <h1>Pet Creation</h1>
+        <form>
+          <div class="form-row">
+            <div class="form-group col-lg-6 col-12">
+              <label for="inputPetName">Pet Name</label>
+              <input type="text" class="form-control" id="inputPetName">
             </div>
-            <div class="form-row">
-              <div class="form-group col-lg-6 col-12">
-                <label for="inputPetType">Pet Type</label>
-                <select class="form-select">
-                  <option selected disabled>Choose...</option>
-                  <option value="Dog">Dog</option>
-                  <option value="Dog">Cat</option>
-                </select>
-              </div>
-              <div class="form-group col-lg-6 col-12">
-                <label for="inputPetBreed">Pet Breed</label>
-                <input type="text" class="form-control" id="inputPetBreed">
-              </div>
+            <div class="form-group col-lg-6 col-12">
+              <label for="inputAge">Age</label>
+              <input type="text" class="form-control" id="inputAge">
             </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-lg-6 col-12">
+              <label for="inputPetType">Pet Type</label>
+              <select class="form-select">
+                <option selected disabled>Choose...</option>
+                <option value="Dog">Dog</option>
+                <option value="Dog">Cat</option>
+              </select>
+            </div>
+            <div class="form-group col-lg-6 col-12">
+              <label for="inputPetBreed">Pet Breed</label>
+              <input type="text" class="form-control" id="inputPetBreed">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-lg-3 col-12">
+              <label for="inputFixedBool">Fixed</label>
+              <select class="form-select">
+                <option selected disabled>Choose...</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+            <div class="form-group col-lg-3 col-12">
+              <label for="inputVaccineBool">Vaccinated</label>
+              <select class="form-select">
+                <option selected disabled>Choose...</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+            <div class="form-group col-lg-3 col-12">
+              <label for="inputLocation">City</label>
+              <input type="text" class="form-control" id="inputLocation">
+            </div>
+            <div class="form-group col-lg-3 col-12">
+              <label for="inputOrganization">Organization</label>
+              <input type="text" class="form-control" id="inputOrganization">
+            </div>
+          </div>
 
-            <div class="row">
-              <div class="form-group col-lg-3 col-12">
-                <label for="inputFixedBool">Fixed</label>
-                <select class="form-select">
-                  <option selected disabled>Choose...</option>
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
-                </select>
-              </div>
-              <div class="form-group col-lg-3 col-12">
-                <label for="inputVaccineBool">Vaccinated</label>
-                <select class="form-select">
-                  <option selected disabled>Choose...</option>
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
-                </select>
-              </div>
-              <div class="form-group col-lg-3 col-12">
-                <label for="inputLocation">City</label>
-                <input type="text" class="form-control" id="inputLocation">
-              </div>
-              <div class="form-group col-lg-3 col-12">
-                <label for="inputOrganization">Organization</label>
-                <input type="text" class="form-control" id="inputOrganization">
-              </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label for="inputMultipleImages" class="form-label">Choose up to 5 images</label>
+              <input class="form-control" type="file" id="inputFileMultiple" multiple>
             </div>
-
-            <div class="form-row">
-              <div class="form-group col-12">
-                <label for="inputMultipleImages" class="form-label">Choose up to 5 images</label>
-                <input class="form-control" type="file" id="inputFileMultiple" multiple>
-              </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label for="inputBio" class="form-label">Bio</label>
+              <textarea class="form-control"></textarea>
             </div>
-            <div class="form-row">
-              <div class="form-group col-12">
-                <label for="inputBio" class="form-label">Bio</label>
-                <textarea class="form-control"></textarea>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
-            <a class="btn btn-primary mt-3 ms-3" type="button" href="nav.html">Cancel</a>
-          </form>
-        </div>
+          </div>
+          <a href="pet-detail-page.html" class="btn btn-primary mt-3" role="button">Submit</a>
+          <a href="javascript:" class="btn btn-primary mt-3 ms-3" type="button" href="nav.html">Cancel</a>
+        </form>
       </div>
     </div>
+  </div>
 
-  </body>
-</html> 
+</body>
+
+</html>

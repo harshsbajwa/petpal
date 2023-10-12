@@ -8,40 +8,135 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+  <div class="header">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid nav-container">
+          <a href="search-page.html" class="navbar-brand">PetPal</a>
+          <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="search-page.html" class="nav-link active">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Notifications</a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-item">Notification 1</li>
+                <li class="dropdown-item">Notification 2</li>
+                <li class="dropdown-item">Notification 3</li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">My Applications</a>
+            </li>
+            </ul>
+            <div class="dropdown profile-box">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                Profile
+              </button>
+              <ul class="dropdown-menu dropdown-menu-lg-end">
+                <li class="profile-name">JimmyBobJoe</li>
+                <li class="profile-type">Seeker</li>
+                <li><a class="dropdown-item profile-edit" href="UserAccountUpdate.html">Edit</a></li>
+                <li><a class="dropdown-item profile-edit sign-out" href="landing-page.html">Sign Out</a></li>
+              </ul>
+            </div>
+          </div>
+          
+        </div>
+      </nav>
+  </div>
 
 
 
     <div class="container mt-4">
         
         <h1>Details Page</h1>
+
+
+        <div id="flexcentre">
+          <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="true" data-bs-interval="3000">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="images/biggolden.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="images/dog.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="images/istockphoto-1397600724-612x612.jpg" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+
+
+
+
         <hr>
         <dl class="row">
-            <dt class="col-sm-3">Description lists</dt>
+            <dt class="col-sm-3">Name</dt>
             <dd class="col-sm-9">A description list is perfect for defining terms.</dd>
             <hr>
           
-            <dt class="col-sm-3">Term</dt>
+            <dt class="col-sm-3">Breed</dt>
             <dd class="col-sm-9">
-              <p>Definition for the term.</p>
               <p>And some more placeholder definition text.</p>
             </dd>
-          
-            <dt class="col-sm-3">Another term</dt>
-            <dd class="col-sm-9">This definition is short, so no extra paragraphs or anything.</dd>
-          
-            <dt class="col-sm-3 text-truncate">Truncated term is truncated</dt>
-            <dd class="col-sm-9">This can be useful when space is tight. Adds an ellipsis at the end.</dd>
-          
-            <dt class="col-sm-3">Nesting</dt>
-            <dd class="col-sm-9">
-              <dl class="row">
-                <dt class="col-sm-4">Nested definition list</dt>
-                <dd class="col-sm-8">I heard you like definition lists. Let me put a definition list inside your definition list.</dd>
-              </dl>
-            </dd>
-        </dl>
+            <hr>
 
+            <dt class="col-sm-3">Gender</dt>
+            <dd class="col-sm-9"></dd>
+            <hr>
+
+            <dt class="col-sm-3">Age</dt>
+            <dd class="col-sm-9"></dd>
+            <hr>
+
+            <dt class="col-sm-3">Colour</dt>
+            <dd class="col-sm-9"></dd>
+            <hr>
+
+            <dt class="col-sm-3">Location</dt>
+            <dd class="col-sm-9"></dd>
+            <hr>
+
+            <dt class="col-sm-3">Medical History</dt>
+            <dd class="col-sm-9"></dd>
+            <hr>
+
+            <dt class="col-sm-3">Special Needs</dt>
+            <dd class="col-sm-9"></dd>
+            <hr>
+
+            <dt class="col-sm-3">Additional Info</dt>
+            <dd class="col-sm-9"></dd>
+            <hr>
+
+            <dt class="col-sm-3">Shelter</dt>
+            <dd class="col-sm-9">
+              <a id="redlink" href="ShelterDetail.html"> Click here for shelter details</a>
+            </dd>
+            <hr>
+            
+          
+            
+        </dl>
+        <a class="btn btn-danger" href="pet-adoption-page.html" >
+          Click here to adopt!
+        </a>
+
+        
 
     </div>
     

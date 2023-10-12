@@ -1,50 +1,61 @@
-body{
-  padding: 0px 138px;
-  background-color: #FFEDED ;
+body {
+  padding: 0px 0px;
+  background-image: url('images/istockphoto-1397600724-612x612.jpg');
 }
 
-.navbar{
-  padding: 60px 0px;
+.navbar {
+  padding: 60px 138px;
+  background-color: white;
 }
 
-.nav-container{
+.nav-container {
   padding: 0px;
 }
 
-#nav{
+.navbar {
+  padding: 60px 138px;
+  background-color: white;
+}
+
+.nav-container {
+  padding: 0px;
+}
+
+#nav {
   justify-content: space-between;
 }
 
-.navbar-nav{
+.navbar-nav {
   width: 100%;
   justify-content: center;
   --bs-nav-link-hover-color: #FF5543;
   --bs-nav-link-color: black;
 }
 
-.nav-item{
+.nav-item {
   padding: 0% 3%;
   font-size: 20px;
 }
 
-.navbar-brand{
+.navbar-brand {
   font-weight: bold;
   font-size: 28px;
 }
 
-.navbar-nav .nav-link.active, .navbar-nav .nav-link.show{
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
   font-weight: bold;
   color: #FF5543;
 }
 
-nav .navbar-text{
+nav .navbar-text {
   font-size: 20px;
   font-weight: normal;
   color: black;
 }
 
 nav .btn-primary {
-  --bs-btn-bg:#FF5543;
+  --bs-btn-bg: #FF5543;
   --bs-btn-border-color: #FF5543;
   --bs-btn-hover-bg: #FF5543;
   --bs-btn-hover-border-color: #FF5543;
@@ -59,44 +70,47 @@ nav .dropdown-menu[data-bs-popper] {
   --bs-dropdown-link-active-bg: #FF5543;
 }
 
-nav .profile-box .dropdown-menu[data-bs-popper]{
+nav .profile-box .dropdown-menu[data-bs-popper] {
   --bs-dropdown-min-width: 90px;
 }
 
-nav .profile-name{
+nav .profile-name {
   font-weight: bold;
   padding: 4px 16px 0 16px;
   padding-bottom: 0px;
 }
 
-nav .profile-type{
+nav .profile-type {
   font-size: small;
   padding: 0 16px 0 16px;
 }
 
-nav .profile-edit{
-margin-top: 20%;
+nav .profile-edit {
+  margin-top: 20%;
 }
 
-nav .sign-out{
+nav .sign-out {
   margin-top: 5%;
- }
-
-
-
-@media (max-width: 992px) { 
-  nav .profile-box {
-      padding: 8px 0 8px 0;
-  }
-
-  nav .nav-item{
-      padding-left: 0;
-  }
 }
 
-@media (max-width: 576px) { 
-  body{
-      padding: 0px 25%;
+@media (max-width: 768px) {
+  body {
+    padding: 0px 20px;
+  }
+
+  .navbar {
+    margin: 0px -20px;
+  }
+
+}
+
+@media (max-width: 992px) {
+  nav .profile-box {
+    padding: 8px 0 8px 0;
+  }
+
+  nav .nav-item {
+    padding-left: 0;
   }
 }
 

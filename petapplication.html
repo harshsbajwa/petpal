@@ -1,40 +1,46 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="petapplicationstyles.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <title>Application Page</title>
-  </head>
-  <body>
-    
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="petapplicationstyles.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <title>Application Page</title>
+</head>
+
+<body>
+
+  <div class="header">
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid nav-container">
-        <a href="#" class="navbar-brand">PetPal</a>
+        <a href="search-page.html" class="navbar-brand">PetPal</a>
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="nav">
           <ul class="navbar-nav">
-          <li class="nav-item">
-            <a href="#" class="nav-link active">Home</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Notifications</a>
-            <ul class="dropdown-menu">
-              <li class="dropdown-item">Notification 1</li>
-              <li class="dropdown-item">Notification 2</li>
-              <li class="dropdown-item">Notification 3</li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">My Pets</a>
-          </li>
+            <li class="nav-item">
+              <a href="search-page.html" class="nav-link active">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Notifications</a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-item">Notification 1</li>
+                <li class="dropdown-item">Notification 2</li>
+                <li class="dropdown-item">Notification 3</li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">My Applications</a>
+            </li>
           </ul>
           <div class="dropdown profile-box">
             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
@@ -43,129 +49,135 @@
             <ul class="dropdown-menu dropdown-menu-lg-end">
               <li class="profile-name">JimmyBobJoe</li>
               <li class="profile-type">Seeker</li>
-              <li><a class="dropdown-item profile-edit" href="#">Edit</a></li>
-              <li><a class="dropdown-item profile-edit sign-out" href="#">Sign Out</a></li>
+              <li><a class="dropdown-item profile-edit" href="UserAccountUpdate.html">Edit</a></li>
+              <li><a class="dropdown-item profile-edit sign-out" href="landing-page.html">Sign Out</a></li>
             </ul>
           </div>
         </div>
-        
       </div>
     </nav>
+  </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="box">
-          <h1>Pet Application</h1>
-          <form>
-            <fieldset disabled>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputFirstName">First Name</label>
-                  <input type="text" class="form-control" id="inputFirstName" placeholder="John">
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputLastName">Last Name</label>
-                  <input type="text" class="form-control" id="inputLastName" placeholder="Smith">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-12">
-                  <label for="inputAddress">Address</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-12">
-                  <label for="inputAddress2">Address 2</label>
-                  <input type="text" class="form-control" id="inputAddress2" placeholder="APT 101">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputCity">City</label>
-                  <input type="text" class="form-control" id="inputCity" placeholder="Toronto">
-                </div>
-                <div class="form-group col-md-4">
-                  <label for="inputPostalCode">Province/Territory</label>
-                  <input type="text" class="form-control" id="inputPostalCode" placeholder="ON">
-                </div>
-                <div class="form-group col-md-2">
-                  <label for="inputZip">Postal Code</label>
-                  <input type="text" class="form-control" id="inputZip" placeholder="M1A 1A1">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-12">
-                  <label for="inputEmail">Email</label>
-                  <input type="text" class="form-control" id="inputEmail" placeholder="johnsmith@gmail.com">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-12">
-                  <label for="inputPhoneNumber">Phone Number</label>
-                  <input type="text" class="form-control" id="inputPhoneNumber" placeholder="(416) 555 5555">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-lg-6 col-12">
-                  <label for="inputWhoAdopting">Who are you adopting this dog for?</label>
-                  <input type="text" class="form-control" id="inputWhoAdopting" placeholder="Myself">
-                </div>
-                <div class="form-group col-lg-6 col-12">
-                  <label for="inputTypeHome">What type of home do you live in?</label>
-                  <input type="text" class="form-control" id="inputTypeHome" placeholder="Apartment">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-lg-6 col-12">
-                  <label for="inputNumberAdults">Number of adults at home</label>
-                  <input type="text" class="form-control" id="inputNumberAdults" placeholder="2">
-                </div>
-                <div class="form-group col-lg-6 col-12">
-                  <label for="inputNumberChildren">Number of children at home</label>
-                  <input type="text" class="form-control" id="inputNumberChildren" placeholder="3">
-                </div>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <div class="container py-5">
-      <div class="row d-flex justify-content-center">
-        <div class="col-12">
-          <div class="card" id="chat1" style="border-radius: 10px;">
-            <div
-              class="card-header d-flex justify-content-between align-items-center p-3 text-white border-bottom-0"
-              style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-              <i class="fas fa-angle-left"></i>
-              <p class="mb-0 fw-bold">Chat</p>
-              <i class="fas fa-times"></i>
+  <div class="container mt-5">
+    <div class="form-container">
+      <form class="form-group">
+        <fieldset disabled>
+          <h1> Pet Adoption Form </h1>
+          <div class="form-row">
+            <div class="form-group col-md-6 col-12">
+              <label for="" class="form-label">First Name</label>
+              <input type="text" class="form-control" placeholder="Joe">
             </div>
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <p class="small mb-1">Toronto Humane Society</p>
-                <p class="small mb-1 text-muted">10 Oct 5:00 pm</p>
+            <div class="form-group col-md-6 col-12">
+              <label for="" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="inputEmail4" placeholder="Smith">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6 col-12">
+              <label for="" class="form-label">Email</label>
+              <input type="email" class="form-control" placeholder="joesmith@gmail.com">
+            </div>
+            <div class="form-group col-md-6 col-12">
+              <label for="inputPassword4" class="form-label">Phone Number</label>
+              <input type="text" class="form-control" placeholder="(123) 456-7899">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label for="inputAddress" class="form-label">Address</label>
+              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label for="inputAddress2" class="form-label">Address 2</label>
+              <input type="text" class="form-control" id="inputAddress2" placeholder="APT 101">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6 col-12">
+              <label for="inputCity" class="form-label">Toronto</label>
+              <input type="text" class="form-control" id="inputCity">
+            </div>
+            <div class="form-group col-md-4 col-12">
+              <label for="inputState" class="form-label">Province</label>
+              <select id="inputState" class="form-select">
+                <option selected>Ontario</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2 col-12">
+              <label for="inputPostalCode" class="form-label">Postal Code</label>
+              <input type="text" class="form-control" id="inputPostalCode" placeholder="M5A 1A1">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-12">
+              <div class="form-check mb-1 mt-1">
+                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <label class="form-check-label" for="gridCheck">
+                  I am over 18 years of age
+                </label>
               </div>
-              <div class="d-flex flex-row justify-content-start pb-5">
-                <div>
-                  <p class="small p-2 mb-3 rounded-3" style="background-color: #f5f6f7;">
-                    Lorem ipsum dolor sit amet.
-                  </p>
-                </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6 col-12">
+              <label for="inputState" class="form-label">Employment Status</label>
+              <select id="inputState" class="form-select">
+                <option selected>Unemployed</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6 col-12 mt-2">
+              <label for="inputTypeHome">What type of home do you live in?</label>
+              <input type="text" class="form-control" id="inputTypeHome" placeholder="Apartment">
+            </div>
+          </div>
+
+          <div class="form-group col-12">
+            <label for="inputAddress" class="form-label">Additional Info:</label>
+            <input type="text" class="form-control " placeholder="I love dogs.">
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-12">
+        <div class="card" id="chat1" style="border-radius: 10px;">
+          <div class="card-header d-flex justify-content-between align-items-center p-3 text-white border-bottom-0"
+            style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+            <i class="fas fa-angle-left"></i>
+            <p class="mb-0 fw-bold">Chat</p>
+            <i class="fas fa-times"></i>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <p class="small mb-1">Toronto Humane Society</p>
+              <p class="small mb-1 text-muted">10 Oct 5:00 pm</p>
+            </div>
+            <div class="d-flex flex-row justify-content-start pb-5">
+              <div>
+                <p class="small p-2 mb-3 rounded-3" style="background-color: #f5f6f7;">
+                  Lorem ipsum dolor sit amet.
+                </p>
               </div>
-              <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3 mt-5">
-                <div class="input-group mb-0">
-                  <input type="text" class="form-control" placeholder="Type here..."/>
-                  <button class="btn btn-primary" type="submit">Submit</button>
-                </div>
+            </div>
+            <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3 mt-5">
+              <div class="input-group mb-0">
+                <input type="text" class="form-control" placeholder="Type here..." />
+                <button class="btn btn-primary" type="submit">Submit</button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-  </body>
-</html> 
+</body>
+
+</html>
