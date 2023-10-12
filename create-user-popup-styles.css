@@ -91,7 +91,7 @@ textarea.form-control {
 
 @media (max-width: 768px) { 
 .left{
-    padding: 0;
+    padding-right: 0;
 }
 
 .box-area{
