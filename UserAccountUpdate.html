@@ -1,172 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <!-- 
-    Features:
-    1. basic information (name, email, password)
-    2. additional details (contact info, location, preferences)
-    3. profile pic upload
--->
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="AccountUpdateStyle.css" />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-    <title>Update User Account</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="AccountUpdateStyle.css">
+    <title>Updat User Account</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid nav-container">
-        <a href="#" class="navbar-brand">PetPal</a>
-        <button
-          class="navbar-toggler"
-          data-bs-toggle="collapse"
-          data-bs-target="#nav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="nav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a href="#" class="nav-link active">Home</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                data-bs-toggle="dropdown"
-                href="#"
-                >Notifications</a
-              >
-              <ul class="dropdown-menu">
-                <li class="dropdown-item">Notification 1</li>
-                <li class="dropdown-item">Notification 2</li>
-                <li class="dropdown-item">Notification 3</li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">My Pets</a>
-            </li>
-          </ul>
-          <div class="dropdown profile-box">
-            <button
-              type="button"
-              class="btn btn-primary dropdown-toggle"
-              data-bs-toggle="dropdown"
-            >
-              Profile
-            </button>
-            <ul class="dropdown-menu dropdown-menu-lg-end">
-              <li class="profile-name">JimmyBobJoe</li>
-              <li class="profile-type">Seeker</li>
-              <li><a class="dropdown-item profile-edit" href="#">Edit</a></li>
-              <li>
-                <a class="dropdown-item profile-edit sign-out" href="#"
-                  >Sign Out</a
-                >
-              </li>
-            </ul>
-          </div>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="border bg-white shadow box-area row">
+            <div class="title w-100">Update PetPal Account</div>
+            <form action="https://postman-echo.com/post" method="post" id="contactForm"  enctype="multipart/form-data"></form>
+                <div class="left col-md-6">                
+                    <div class="row">
+                        <div class="mb-3 col-6 pr-0">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="fname" class="form-control" id="firstName" name="fname" autocomplete="given-name" value="JimmyBobJoe">
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="lname" class="form-control" id="lastName" name="lname" autocomplete="family-name" value="Smith">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailInput" class="form-label" >Email address</label>
+                        <input type="email" class="form-control" id="emailInput" name="email" value="jimmyjoe@yahoo.ca" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordInput" class="form-label">Old Password</label>
+                        <input type="password" class="form-control" id="opasswordInput" name="opassword" value="HelloWorld">
+                    </div>
+                    <div class="mb-3">
+                        <label for="passwordInput" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="passwordInput" name="password">
+                    </div>
+                    <div class="mb-4">
+                        <label for="cpasswordInput" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="cpasswordInput" name="cpassword">
+                    </div>
+                </div>
+                <div class="right col-md-6">
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input class="form-control" id=”phone” value="888-888-8888" title=”XXX-XXX-XXXX” required pattern=”[0-9]{3}-[0-9]{3}-[0-9]{4}”>
+                    </div>                       
+                    <div class="mb-3">
+                        <label for="addressLine" class="form-label" >Street Address</label>
+                        <input type="text" class="form-control" id="addressLine" name="addressLine" value="72 Williams Road">
+                    </div>
+                    <div class="mb-3">
+                        <select type="text" class="form-select" id="countryInp" name="countryInp">
+                            <option>Canada</option>
+                            <option>United States Of America</option>
+                            <option>Mexico</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="mb-2">Additional Preferences</label>
+                        <textarea class="form-control preferences" id="exampleFormControlTextarea1" rows="2">I only want cute dogs!</textarea>
+                    </div>     
+                </div>
+                <div class="input-group mb-3"> 
+                    <label for="inputGroupFile01" class="w-100 mb-2"> Upload a New Profile Picture (Current file: Charlie.jpg)</label>
+                    <input type="file" class="form-control" id="inputGroupFile01"> 
+                </div> 
+                <div class="input-group mb-3">
+                <a class="w-100" href="landing-page.html">
+                    <button type="submit" class="btn btn-primary w-100 fs-6" href="landing-page.html">Make Changes</button>
+                </a>
+                </div>
+            </form>
         </div>
-      </div>
-    </nav>
-    <div class="container">
-      <div class="mx-auto">
-        <form class="form">
-          <div class="mb-3">
-            <label for="PetName" class="form-label">Pet Name</label>
-            <input type="text" class="form-control" id="PetName" required />
-          </div>
-          <div class="mb-3">
-            <label for="Breed" class="form-label">Breed</label>
-            <input type="text" class="form-control" id="Breed" required />
-          </div>
-          <div class="mb-3">
-            <label for="Age" class="form-label">Age</label>
-            <div
-              style="
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-              "
-            >
-              <input type="number" class="form-control" id="Age" />
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                required
-              >
-                <option selected>Select</option>
-                <option value="Months">Months</option>
-                <option value="Years">Years</option>
-              </select>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="Gender" class="form-label">Gender</label>
-            <select
-              class="form-select"
-              aria-label="Default select example"
-              required
-            >
-              <option selected>Select</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="Size" class="form-label">Size</label>
-            <select
-              class="form-select"
-              aria-label="Default select example"
-              required
-            >
-              <option selected>Select</option>
-              <option value="Small">Small</option>
-              <option value="Medium">Medium</option>
-              <option value="Large">Large</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="Description" class="form-label">About</label>
-            <textarea
-              class="form-control"
-              id="Description"
-              rows="3"
-              required
-            ></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="Status" class="form-label">Status</label>
-            <select
-              class="form-select"
-              aria-label="Default select example"
-              required
-            >
-              <option selected>Select</option>
-              <option value="Available">Available</option>
-              <option value="Adopted">Adopted</option>
-              <option value="Pending">Pending</option>
-              <option value="Withdrawn">Withdrawn</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary">Add</button>
-        </form>
-      </div>
     </div>
   </body>
 </html>

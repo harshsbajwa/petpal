@@ -1,8 +1,5 @@
 body {
-     
     background-image: url('images/istockphoto-1397600724-612x612.jpg');
-    background-color: white
-
 }
 
 .display-6 {
@@ -99,7 +96,6 @@ img {
 .navbar{
     padding: 60px 138px;
     background-color: white;
-    
 }
 
 .nav-container{
@@ -175,10 +171,6 @@ nav .profile-edit{
 nav .sign-out{
     margin-top: 5%;
    }
-
-
-
-
 
  @media (max-width: 768px) { 
     body {
