@@ -99,12 +99,23 @@ nav .sign-out{
 
  @media (max-width: 576px) { 
     body{
-        padding: 0px 25%;
+       
     }
 
     image {
         width: 80%;
         height: auto
+    }
+    .navbar{
+        padding: 60px 20%;
+        background-color: white;
+    }
+    
+ }
+
+ @media (max-width: 250px){
+    .email-style{
+        overflow-wrap: break-word;
     }
  }
 
