@@ -146,6 +146,12 @@ h1 {
 .btn {
   background-color: #FF5543;
   color: #FFEDED;
+  border-color: #FF5543;
+}
+
+.status-style{
+  background-color: rgb(53, 53, 239);
+  border-color: rgb(53, 53, 239);
 }
 
 .card-header {
