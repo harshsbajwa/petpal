@@ -94,10 +94,12 @@ nav .sign-out{
     background: linear-gradient(289deg, rgba(255,149,79,1) 0%, rgba(244,71,100,1) 100%);;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    overflow-wrap: break-word;
 }
 
 .greeting{
     font-size: 35px;
+    overflow-wrap: break-word;
 }
 
 .second-greeting{
@@ -108,10 +110,12 @@ nav .sign-out{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     padding-bottom: 20px;
+    overflow-wrap: break-word;
 }
 
 .paragraph{
     padding-bottom: 60px;
+    overflow-wrap: break-word;
 }
 
 .btn-style{
@@ -124,6 +128,7 @@ nav .sign-out{
     --bs-btn-disabled-bg: #FF5543;
     --bs-btn-disabled-border-color: #FF5543;
     background: linear-gradient(289deg, rgba(249,103,41,1) 0%, rgba(244,71,100,1) 100%);
+    overflow-wrap: break-word;
 }
 
 .dog-pic{
@@ -139,6 +144,8 @@ nav .sign-out{
     body {
         padding: 0px 20px;
     }
+
+  
 
     .navbar {
         margin: 0px -20px;
@@ -166,6 +173,20 @@ nav .sign-out{
         width: 80px;
     }
 
+    .btn-style{
+        padding: 0;
+        text-wrap:wrap;
+        width: 100%;
+    }
+
+    .dog-pic{
+        border: 1px;
+        border-radius: 1rem;
+        margin-top: 76px;
+        max-height: 100%;
+        margin-bottom: 70px;
+    }
+
 
  }
 
@@ -176,6 +197,21 @@ nav .sign-out{
 
     nav .nav-item{
         padding-left: 0;
+    }
+ }
+
+ @media (max-width:300px){
+    .dog-pic{
+        border: 0px;
+        border-radius: 0rem;
+        margin-top: 76px;
+        max-height: 100%;
+        margin-bottom: 70px;
+    }
+    .btn-style{
+        padding: 0;
+        text-wrap:wrap;
+        width: 100%;
     }
  }
 

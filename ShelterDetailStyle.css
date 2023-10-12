@@ -98,9 +98,6 @@ nav .sign-out{
  }
 
  @media (max-width: 576px) { 
-    body{
-       
-    }
 
     image {
         width: 80%;
