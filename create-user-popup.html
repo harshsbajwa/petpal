@@ -34,12 +34,12 @@
                         <input type="email" class="form-control" id="emailInput" name="email" >
                     </div>
                     <div class="mb-3">
-                        <label for="passwordInput" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="passwordInput" name="password">
+                        <label for="passwordInput" class="form-label error">Password</label>
+                        <input type="password" class="form-control password-error" id="passwordInput" name="password">
                     </div>
                     <div class="mb-4">
-                        <label for="cpasswordInput" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="cpasswordInput" name="cpassword">
+                        <label for="cpasswordInput" class="form-label error">Confirm Password</label>
+                        <input type="password" class="form-control password-error" id="cpasswordInput" name="cpassword">
                     </div>
                 </div>
                 <div class="right col-md-6">
@@ -74,7 +74,9 @@
                     </a>
                 </div>
             </form>
-            <small class="error">**ONE OF THE FIELDS WERE ENTERED INCORRECTLY**</small>
+           
+            <small class="error">**Your passwords do not match**</small>
+            <small class="error">**Your phone number was not entered in the correct format**</small>
             <small>Already have an account? <a href="landing-page.html">Log In</a></small>
         </div>
     </div>

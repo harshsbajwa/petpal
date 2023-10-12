@@ -1,0 +1,23 @@
+<div class="dropdown profile-box">
+                <button
+                  type="button"
+                  class="btn btn-primary dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                >
+                  Update Status
+                </button>
+                <ul class="dropdown-menu dropdown-menu-lg-end">
+                  <li class="text-center">
+                    <a class="dropdown-item" href="#">Available</a>
+                  </li>
+                  <li class="text-center">
+                    <a class="dropdown-item" href="#">Adopted</a>
+                  </li>
+                  <li class="text-center">
+                    <a class="dropdown-item" href="#">Pending</a>
+                  </li>
+                  <li class="text-center">
+                    <a class="dropdown-item" href="#">Withdrawn</a>
+                  </li>
+                </ul>
+              </div>

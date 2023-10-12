@@ -3,28 +3,28 @@ body{
 }
 
 .box-area{
-    width: 800px;
+    width: 400px;
     border-radius: 15px;
     padding: 20px;
 }
 
 .btn-primary {
     color: #fff;
-    background-color: #FF5543;;
-    border-color: #FF5543;;
+    background-color: #FF5543;
+    border-color: #FF5543;
     height: 50px;
 }
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #FF5543;;
-    border-color: #FF5543;;
+    background-color: #FF5543;
+    border-color: #FF5543;
 }
 
 .btn-primary:active {
     color: #fff;
     background-color: #FF5543;
-    border-color: #FF5543;;
+    border-color: #FF5543;
 }
 
 .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
@@ -49,60 +49,22 @@ a {
 }
 
 .left{
-    padding-right: 25px;
+    padding: 0;
+    padding-right: 16px;
 }
 
-select{
-    padding: 6px 12px 6px 12px;
-    width: 100%;
-    box-sizing: border-box;
-    height: 38px;
-    border-color: rgb(206, 212, 218);
-    border-radius: 0.25rem;
-    color: #495057;
-}
-
-textarea.form-control {
-    box-sizing: border-box;
-    height: 72px;
-    resize: none;
-}
-
-.ppic{
-    width: 100px;
-    padding-bottom: 24px;
+.right{
+    padding: 0;
 }
 
 .error{
     color: #FF5543;
 }
 
-.phone{
+.label-error{
     border-top-color: #FF5543;
     border-right-color: #FF5543;
     border-bottom-color: #FF5543;
     border-left-color: #FF5543;
     color: #FF5543;
-}
-
-.password-error{
-    border-top-color: #FF5543;
-    border-right-color: #FF5543;
-    border-bottom-color: #FF5543;
-    border-left-color: #FF5543;
-    color: #FF5543;
-}
-
-
-
-
-
-@media (max-width: 768px) { 
-.left{
-    padding-right: 0;
-}
-
-.box-area{
-    margin: 1%;
-}
 }
