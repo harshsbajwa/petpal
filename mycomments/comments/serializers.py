@@ -6,10 +6,12 @@ from .models import Comment
 class ApplicationCommentSerializer(ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['text', 'user', 'application', 'created_at']
+        #fields = ['text', 'user', 'application', 'created_at']
+        fields = ['text', 'created_at']
 
 class ShelterCommentSerializer(ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['text', 'shelter', 'created_at']
+        #fields = ['text', 'shelter', 'created_at']
+        fields = ['text', 'created_at']
 

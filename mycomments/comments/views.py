@@ -44,6 +44,7 @@ class ApplicationCommentsListCreate(ListCreateAPIView):
 
 class RetreiveShelterComments(APIView):
     permission_classes = [IsAuthenticated]
+    serializer_class = ShelterCommentSerializer
     def get(self, request, pk):
         comments = Comment.objects.filter(shelter=pk).order_by('-created_at')
         return Response([
@@ -56,6 +57,7 @@ class RetreiveShelterComments(APIView):
              for comment in comments])
 
 class RetreiveApplicationComments(APIView):
+    serializer_class = ApplicationCommentSerializer
     permission_classes = [IsAuthenticated]
     def get(self, request):
         application = get_object_or_404(Application, pk=self.kwargs['pk'])
