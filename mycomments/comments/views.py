@@ -44,8 +44,8 @@ class ApplicationCommentsListCreate(ListCreateAPIView):
 
 class RetreiveShelterComments(APIView):
     permission_classes = [IsAuthenticated]
-    def get(self, request):
-        comments = Comment.objects.filter(shelter=self.kwargs['pk']).order_by('-created_at')
+    def get(self, request, pk):
+        comments = Comment.objects.filter(shelter=pk).order_by('-created_at')
         return Response([
             {
                 'text': comment.text,
