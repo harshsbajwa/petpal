@@ -11,10 +11,10 @@ from django.contrib.auth.models import User
 
 class Comment(models.Model):
     text = models.CharField(max_length=200, null=False)
-    user = models.ForeignKey(User, related_name='usercomments', 
+    user = models.ForeignKey(User, related_name='user_comments', 
                                 null=True, on_delete=models.SET_NULL,
                                 blank=True)
-    shelter = models.ForeignKey(User, related_name="creatorcomments", null=True, on_delete=models.SET_NULL,
+    shelter = models.ForeignKey(User, related_name="shelter_comments", null=True, on_delete=models.SET_NULL,
                                 blank=True)
     #application = models.ForeignObject(Application, on_delete=models.SET_NULL, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
