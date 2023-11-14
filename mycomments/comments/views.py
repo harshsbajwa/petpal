@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
-from .comments import Comment
+from .models import Comment
 from .serializers import ApplicationCommentSerializer, ShelterCommentSerializer
 #import Shelter model
 #import Application model
