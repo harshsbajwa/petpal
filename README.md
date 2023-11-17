@@ -4,7 +4,7 @@ This project aims to create a Django backend implementing a RESTful API for PetP
 
 ## Overview
 
-The webpage is currently built with Bootstrap for the frontend and the Django Rest Framwork on the backend.
+The webpage is currently built with Bootstrap for the frontend and the Django Rest Framwork on the backend. The frontend will later be converted to React.
 
 ## Setup
 
