@@ -7,10 +7,9 @@ from comments.serializers import ApplicationCommentSerializer
 
 
 class ApplicationSerializer(ModelSerializer):
-    comments = ApplicationCommentSerializer(many=True, read_only=True)
     class Meta:
         model = Application
-        fields = ['pet_seeker', 'pet_listing', 'shelter', 'status', 'created_at', 'updated_at', 'form', 'comments']
+        fields = '__all__'
 
     # def validate_form(self, data):
     #     if not data:

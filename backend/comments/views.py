@@ -34,17 +34,13 @@ class ShelterCommentsListCreate(ListCreateAPIView):
         serializer.save(shelter=shelter, user=self.request.user)
 
         user = self.request.user
-        if user.is_seeker:
-            sender = user
-            recipient = Application.shelter.user
-        else:
-            sender = Application.shelter.user
-            recipient = user
+        sender = user
+        recipient = shelter.user 
 
         notification_data = {
-            "sender": sender,
-            "recipient": recipient,
-            "message": "A new comment is available on the application for {}".format(serializer.instance.pet_listing.name),
+            "sender": sender.id,
+            "recipient": recipient.id,
+            "message": "A new comment is available for shelter name {}".format(shelter.user.username),
             "comment": None,
             "application": serializer.instance
         }
@@ -68,17 +64,12 @@ class ApplicationCommentsListCreate(ListCreateAPIView):
             serializer.save(application=application, user=self.request.user)
 
             user = self.request.user
-            if user.is_seeker:
-                sender = user
-                recipient = Application.shelter.user
-            else:
-                sender = Application.shelter.user
-                recipient = user
-
+            sender = user
+            recipient = application.shelter.user
             notification_data = {
-                "sender": sender,
-                "recipient": recipient,
-                "message": "A new comment is available on the application for {}".format(serializer.instance.pet_listing.name),
+                "sender": sender.id,
+                "recipient": recipient.id,
+                "message": "A new comment is available on the application for {}".format(application.pet_listing.name),
                 "comment": None,
                 "application": serializer.instance
             }

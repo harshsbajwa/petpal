@@ -17,10 +17,10 @@ class Application(models.Model):
     """
     class Status(models.TextChoices):
         """An Enum for various Application statuses. Names are Self-Explanatory."""
-        ACCEPTED = 'Accepted'
-        DENIED = 'Denied'
-        PENDING = 'Pending'
-        WITHDRAWN = 'Adopted'
+        ACCEPTED = 'accepted'
+        DENIED = 'denied'
+        PENDING = 'pending'
+        WITHDRAWN = 'adopted'
 
     pet_seeker = models.ForeignKey(Seeker, on_delete=models.CASCADE, null=False)
     pet_listing = models.ForeignKey(PetListing, on_delete=models.CASCADE, null=False)
