@@ -19,9 +19,9 @@ const ApplicationList = () => {
                 });
 
                 setApplications(response.data);
-
+                console.log(response.data);
                 const applicationsWithDetails = await Promise.all(
-                    response.data.map(async (application, index) => {
+                    response.data.results.map(async (application, index) => {
                         const petResponse = await axios.get(`http://localhost:8000/user/petlistings/${application.pet_listing}/`, {
                             headers: {
                                 Authorization: `Bearer ${token}`,
