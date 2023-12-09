@@ -81,7 +81,7 @@ const AddPet = (props) => {
         }
     }
     return (
-        <div className="container d-flex justify-content-center align-items-center min-vh-100">
+        <div className="d-flex justify-content-center align-items-center min-vh-100">
         <div className="border bg-white shadow box-area row">
             <div className="title w-100">PetPal</div>
             <div className="mb-4 subtitle w-100">Add A Pet To Your Shelter:</div>

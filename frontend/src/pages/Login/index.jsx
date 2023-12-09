@@ -2,16 +2,17 @@ import styles from './landing-styles.css'; // Import CSS module
 import React, { useContext, useEffect } from 'react';
 import { useState } from "react";
 import axios from 'axios';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { TokenContext } from '../../context/TokenContext';
 import { IsShelterContext } from '../../context/IsShelterContext';
 
-const Login = (props) => {
+const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
     const {token, setToken} = useContext(TokenContext);
     const {isShelter, setIsShelter} = useContext(IsShelterContext);
+    const navigate = useNavigate()
 
     const trylogin = () => {
         const payload = {username: username, password: password}
@@ -19,34 +20,42 @@ const Login = (props) => {
         .then(response => {
             setError(false);
             setToken(response.data.access);
-            console.log("this is the token for login"+token); 
-            // props.history.push("/search-page")
+            
         })
         .catch(error => {
             setError(true);
           });
-        
     }
-    
-    // useEffect(()=>{
-    //     const config = {
-    //         headers: { Authorization: `Bearer ${token}` }
-    //       };
-    //     if (token != null){
-    //         axios.get('http://127.0.0.1:8000/api/seeker/dashboard/', config)
-    //         .then(response => {
-    //             setIsShelter(false);
-    //             console.log("random");
-    //         })
-    //         .catch(error => {
-    //             setIsShelter(true);
-    //          })
-    //     }
-        
-    // }, [token, setIsShelter])
+
+    const getUserType = () => {
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+            };
+        if (token != null){
+            axios.get('http://127.0.0.1:8000/api/seeker/dashboard/', config)
+            .then(response => {
+                setIsShelter(false);
+                console.log("random");
+            })
+            .catch(error => {
+                setIsShelter(true);
+                return;
+                })
+        } 
+    }
+
+    useEffect(() => {
+        getUserType();
+    }, [token])
+   
+    useEffect(() => {
+        console.log("this is the token for login " + token);
+        console.log("isShelter is " + isShelter);
+        if (isShelter === false) {navigate("/search-page")};
+    }, [isShelter])
     
     return(
-        <div className="container d-flex justify-content-center align-items-center min-vh-100">
+        <div className="d-flex justify-content-center align-items-center min-vh-100">
             <div className="border bg-white shadow landing-box-area">
             <div className="title">PetPal</div>
             <div className="mb-4 subtitle">Welcome back!</div>

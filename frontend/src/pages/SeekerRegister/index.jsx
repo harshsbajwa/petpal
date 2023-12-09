@@ -155,7 +155,7 @@ const UserRegister = () => {
 
 
     return(
-        <div className="container d-flex justify-content-center align-items-center min-vh-100">
+        <div className="d-flex justify-content-center align-items-center min-vh-100">
         <div className="border bg-white shadow box-area row">
             <div className="title w-100">PetPal</div>
             <div className="subtitle">

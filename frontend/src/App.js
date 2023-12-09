@@ -23,7 +23,9 @@ function App() {
             <Route path='/seeker-register' element={<SeekerRegister />} />
               <Route path='/shelter-register' element={<ShelterRegister />} />
               <Route path='/shelter-register-add-pet' element={<AddPet />} />
-              <Route path='/search-page' element={<Search />} /> 
+              <Route element={<ProtectedSeekerRoutes/>}>
+                <Route path='/search-page' element={<Search />} /> 
+              </Route>
           </Routes>
         </BrowserRouter>
       </IsShelterContext.Provider>
