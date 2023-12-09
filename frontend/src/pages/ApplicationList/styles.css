@@ -188,3 +188,23 @@ h1 {
     color: #555;
     margin-bottom: 0;
 }
+
+.preview-container {
+    background-color: salmon;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    padding: 10px 30px 10px 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .preview-content {
+    flex: 1; 
+  }
+  
+  h3 {
+    font-size: 1.5rem; 
+    font-weight: bold;
+    margin: 0; 
+  }
+  

@@ -18,6 +18,11 @@ class ApplicationsView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixin
     serializer_class = ApplicationSerializer
     pagination_class= PageNumberPagination
 
+    def retrieve(self, request, *args, **kwargs):
+        print(request)
+        return super().retrieve(request, *args, **kwargs)
+        
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
