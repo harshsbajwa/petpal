@@ -24,7 +24,7 @@ const Search = () => {
     const {token, setToken} = useContext(TokenContext);
     const {isShelter, setIsShelter} = useContext(IsShelterContext);
 
-    const access_token = "Bearer " + access_token;
+    const access_token = "Bearer " + token;
     console.log("this is the token"+token);
     const headers = {
         Authorization: access_token,
