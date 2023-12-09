@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { createRoot } from 'react-dom/client';
 // import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import './style.css'; // Import your custom CSS
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useState, useContext } from 'react';
 import { ajax } from '../../ajax';
 import { TokenContext } from '../../context/TokenContext';
 import { IsShelterContext } from '../../context/IsShelterContext';
@@ -30,9 +30,6 @@ const Search = () => {
         Authorization: access_token,
         'Content-Type': 'application/json', // Adjust content type as needed
       };
-
-
-
 
     var page = 1;
 
@@ -77,7 +74,6 @@ const Search = () => {
             ajaxurl= ajaxurl + `ordering=${selectedSort}`;
         }
         console.log(ajaxurl);
-
 
         ajax(ajaxurl, {     //for now can do /?page=2 to view the second page etc
             method: "GET",
@@ -148,9 +144,6 @@ const Search = () => {
             responsivediv.append(adoptbutton);
             secondcardbody.append(responsivediv);
 
-
-
-
             firstcardbody.append(firsth, firstp);
             outerDiv.append(firstcardbody, ulist, secondcardbody);
             document.getElementById('display').append(outerDiv);
@@ -170,13 +163,6 @@ const Search = () => {
 
             })
 
-
-
-            
-            
-
-
-            
         })
 
         .catch(error => {
@@ -185,10 +171,6 @@ const Search = () => {
 
         event.preventDefault();
     }
-
-
-
-
 
   return (
     <div>
@@ -214,7 +196,7 @@ const Search = () => {
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a href="my-applications.html" className="nav-link">My Applications</a>
+                  <Link to="/applications" className='nav-link'>Applications</Link>
                 </li>
                 </ul>
                 <div className="dropdown profile-box">

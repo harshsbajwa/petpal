@@ -10,6 +10,8 @@ import ProtectedSeekerRoutes from './context/ProtectedSeekerRoutes';
 import ProtectedShelterRoutes from './context/ProtectedShelterRoutes';
 import { IsShelterContext } from './context/IsShelterContext';
 import Search from './pages/Search';
+import ApplicationList from './pages/ApplicationList';
+import Application from './pages/Application';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -26,6 +28,8 @@ function App() {
               <Route element={<ProtectedSeekerRoutes/>}>
                 <Route path='/search-page' element={<Search />} /> 
               </Route>
+              <Route path='/applications' element={<ApplicationList />} />
+              <Route path='/application/:params' element={<Application />} />
           </Routes>
         </BrowserRouter>
       </IsShelterContext.Provider>
