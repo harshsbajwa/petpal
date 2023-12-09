@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createRoot } from 'react-dom/client';
 // import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
@@ -9,18 +9,22 @@ import { ajax } from '../../ajax';
 import { TokenContext } from '../../context/TokenContext';
 import { IsShelterContext } from '../../context/IsShelterContext';
 
+
+
+
 const Search = () => {
 
     const [error, setError] = useState("");
     const navigate = useNavigate();
-    const [selectedStatus, setSelectedStatus] = useState('');
-    const [selectedSort, setSelectedSort] = useState('');
+    const [selectedStatus, setSelectedStatus] = useState('Any');
+    const [selectedSort, setSelectedSort] = useState('None');
+    const [selectedBreed, setSelectedBreed] = useState('Any');
+    const [selectedAge, setSelectedAge] = useState('Any');
     const [responseData, setResponseData] = useState(null);
     const {token, setToken} = useContext(TokenContext);
     const {isShelter, setIsShelter} = useContext(IsShelterContext);
 
-    // const access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAyMTQxNDkzLCJpYXQiOjE3MDIwNTUwOTMsImp0aSI6IjIzOTU5YTE4OWMyMzRlYmE5ODgyYWE3MGRkYTZhYTYwIiwidXNlcl9pZCI6MX0.QziAiYMSdOAW4_hhOfJ6qTvcClnakpEPPORqaP3Sq-g";
-    const access_token = "Bearer " + token;
+    const access_token = "Bearer " + access_token;
     console.log("this is the token"+token);
     const headers = {
         Authorization: access_token,
@@ -28,8 +32,54 @@ const Search = () => {
       };
 
 
+
+
+    var page = 1;
+
     function handle_submit(event) {
-        ajax("/user/petlistings/?page=3", {     //for now can do /?page=2 to view the second page etc
+        //first we're gonna build the url based on the selected sorts and filters
+        var questionmarkflag = 0;
+        var ajaxurl=`/user/petlistings/results/`;
+        if(selectedStatus !== 'Any'){
+            if(questionmarkflag === 0){
+                ajaxurl = ajaxurl + `?`;
+                questionmarkflag = 1;
+            }else{
+                ajaxurl = ajaxurl + `&`;
+            }
+            ajaxurl= ajaxurl + `status=${selectedStatus}`;
+        }
+        if(selectedBreed !== 'Any'){
+            if(questionmarkflag === 0){
+                ajaxurl = ajaxurl + `?`;
+                questionmarkflag = 1;
+            }else{
+                ajaxurl = ajaxurl + `&`;
+            }
+            ajaxurl= ajaxurl + `breed=${selectedBreed}`;
+        }
+        if(selectedAge !== 'Any'){
+            if(questionmarkflag === 0){
+                ajaxurl = ajaxurl + `?`;
+                questionmarkflag = 1;
+            }else{
+                ajaxurl = ajaxurl + `&`;
+            }
+            ajaxurl= ajaxurl + `age=${selectedAge}`;
+        }
+        if(selectedSort !== 'None'){
+            if(questionmarkflag === 0){
+                ajaxurl = ajaxurl + `?`;
+                questionmarkflag = 1;
+            }else{
+                ajaxurl = ajaxurl + `&`;;
+            }
+            ajaxurl= ajaxurl + `ordering=${selectedSort}`;
+        }
+        console.log(ajaxurl);
+
+
+        ajax(ajaxurl, {     //for now can do /?page=2 to view the second page etc
             method: "GET",
             headers: headers,
         })
@@ -39,6 +89,8 @@ const Search = () => {
             console.log(json.results[0])
 
             //need to clear the div here to avoid previous results from showing up
+            document.getElementById('display').replaceChildren(<div></div>);
+            document.getElementById('display').firstChild.remove();
 
             json.results.forEach(item => {
 
@@ -103,6 +155,18 @@ const Search = () => {
             outerDiv.append(firstcardbody, ulist, secondcardbody);
             document.getElementById('display').append(outerDiv);
 
+            //Now make a bunch of buttons for pagination
+            // const paginationdiv = document.getElementById('paginationdiv');
+            // while(json.next !== null){
+            //     const pagebutton = document.createElement('button');
+            //     pagebutton.className = 'btn btn-danger';
+            //     pagebutton.textContent = page;
+            //     paginationdiv.append(pagebutton);
+            //     page++;
+            //     console.log(page);
+            // }
+            
+            // handle_submit();
 
             })
 
@@ -121,7 +185,6 @@ const Search = () => {
 
         event.preventDefault();
     }
-
 
 
 
@@ -198,7 +261,7 @@ const Search = () => {
         </div>
 
         {/**/}
-        <div id="sortandfilter">
+    <div id="sortandfilter">
       <div className="buttonholder">
         <h2 className="display-6">Filters:</h2>
 
@@ -239,19 +302,90 @@ const Search = () => {
                 >Adopted
                 </a>
             </li>
+            <li>
+              <a 
+              className="dropdown-item" 
+              onClick={() => {
+                setSelectedStatus('Any');
+                console.log('Selected Status:', selectedStatus);
+                }}
+                >Any
+                </a>
+            </li>
             
           </ul>
+          <h5 id='centredcardbody'>  {selectedStatus}</h5>
         </div>
 
-        {/* <div>
-            <form >
-                <label>
-                Breed:
-                <input type="text" value="Enter breed here.." />
-                </label>
-                <button type="submit">Submit</button>
-            </form>
-        </div> */}
+
+        <div className="dropdown">
+          <a className="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown">
+            Breed
+          </a>
+
+          <ul className="dropdown-menu">
+            <li>
+              <input
+                id='breedinput'
+                type='text'
+                >
+                </input>
+            </li>
+            <div className="input-group-append" id='centredcardbody'>
+            <a
+              className="btn btn-danger btn-sml"
+              type="button"
+              onClick={() => {
+                console.log(document.getElementById('breedinput').value);
+                setSelectedBreed(document.getElementById('breedinput').value);
+                if(document.getElementById('breedinput').value === ''){
+                    setSelectedBreed('Any');
+                }
+                
+              }}
+            >
+              Submit
+            </a>
+          </div>
+          </ul>
+          <h5 id='centredcardbody'>  {selectedBreed}</h5>
+        </div> 
+
+
+
+
+        <div className="dropdown">
+          <a className="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown">
+            Age
+          </a>
+
+          <ul className="dropdown-menu">
+            <li>
+              <input
+                id='ageinput'
+                type='number'
+                >
+                </input>
+            </li>
+            <div className="input-group-append" id='centredcardbody'>
+            <a
+              className="btn btn-danger btn-sml"
+              type="button"
+              onClick={() => {
+                console.log(document.getElementById('ageinput').value);
+                setSelectedAge(document.getElementById('ageinput').value);
+                if(document.getElementById('ageinput').value === ''){
+                    setSelectedAge('Any');
+                }
+                
+              }}
+            >
+              Submit
+            </a>
+          </div>
+          </ul>
+          <h5 id='centredcardbody'>  {selectedAge}</h5>
+        </div> 
 
         
 
@@ -296,8 +430,19 @@ const Search = () => {
                 }}
               >Age</a>
             </li>
+            <li>
+              <a 
+              className="dropdown-item"
+              onClick={() => {
+                setSelectedSort('None');
+                console.log('Selected Sort:', selectedSort);
+                }}
+              >None</a>
+            </li>
             
           </ul>
+
+          <h5 id='centredcardbody'>  {selectedSort}</h5>
         </div>
       </div>
     </div>
@@ -312,6 +457,8 @@ const Search = () => {
       <div className="container mt-4" name="results-placeholder" id='display'> 
       
       </div>
+
+      <div id='paginationdiv'></div>
 
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
