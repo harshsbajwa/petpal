@@ -1,0 +1,24 @@
+.mx-auto {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+ }
+
+ .container {
+    margin-bottom: 40px;
+    background-color: white;
+    margin-top: 32px;
+    border-radius: 20px;
+ }
+
+ .row {
+    margin-top: 32px;
+ }
+
+ .col-4 {
+    width: 200px;
+ }
+
+ .col-6 {
+    text-align: left;
+ }
