@@ -22,6 +22,7 @@ import Shelterdetail from './pages/ShelterDetail';
 import ListShelter from './pages/ListShelter';
 import SeekerDetail from './pages/SeekerDetail';
 import SeekerUpdate from './pages/SeekerUpdate/index';
+import NotFound from "./pages/NotFound";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -45,6 +46,7 @@ function App() {
             <Route path='/list/shelter' element={<ListShelter />} />
             <Route path='/seeker/detail' element={<SeekerDetail />} />
             <Route path='/seeker/update/' element={<SeekerUpdate />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </IsShelterContext.Provider>

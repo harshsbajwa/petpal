@@ -24,7 +24,7 @@ const ListShelter = () => {
                 const response = await fetch(`http://127.0.0.1:8000/api/shelters/?page=${page}`, config);
                 const json = await response.json();
                 setResponse(json.results); // Update state with shelters data
-                setTotalPages(json.count/2);
+                setTotalPages(Math.ceil(json.count/2));
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
