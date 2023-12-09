@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom/client';
 import { createRoot } from 'react-dom/client';
 // import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import './style.css'; // Import your custom CSS
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useState, useContext } from 'react';
 import { ajax } from '../../ajax';
 import { TokenContext } from '../../context/TokenContext';
 import { IsShelterContext } from '../../context/IsShelterContext';
+import ListShelter from '../ListShelter';
+
+
+
 
 
 
@@ -31,6 +35,7 @@ const Search = () => {
         'Content-Type': 'application/json', // Adjust content type as needed
       };
 
+    var page = 1;
 
 
 
@@ -77,7 +82,6 @@ const Search = () => {
             ajaxurl= ajaxurl + `ordering=${selectedSort}`;
         }
         console.log(ajaxurl);
-
 
         ajax(ajaxurl, {     //for now can do /?page=2 to view the second page etc
             method: "GET",
@@ -148,9 +152,6 @@ const Search = () => {
             responsivediv.append(adoptbutton);
             secondcardbody.append(responsivediv);
 
-
-
-
             firstcardbody.append(firsth, firstp);
             outerDiv.append(firstcardbody, ulist, secondcardbody);
             document.getElementById('display').append(outerDiv);
@@ -169,28 +170,15 @@ const Search = () => {
             // handle_submit();
 
             })
+            // handle_submit();
 
+            })
 
-
-            
-            
-
-
-            
-        })
-
-        .catch(error => {
-            setError(error);
-        });
-
-        event.preventDefault();
+        }
     }
 
-
-
-
-
   return (
+    <>
     <div>
       <div className="header">
         {/* Your Navbar */}
@@ -214,7 +202,7 @@ const Search = () => {
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a href="my-applications.html" className="nav-link">My Applications</a>
+                  <Link to="/applications" className='nav-link'>Applications</Link>
                 </li>
                 </ul>
                 <div className="dropdown profile-box">
@@ -224,7 +212,7 @@ const Search = () => {
                   <ul className="dropdown-menu dropdown-menu-lg-end">
                     <li className="profile-name">JimmyBobJoe</li>
                     <li className="profile-type">Seeker</li>
-                    <li><a className="dropdown-item profile-edit" href="UserAccountUpdate.html">Edit</a></li>
+                    <li><Link to="/seeker/detail" className="dropdown-item profile-edit">Edit</Link></li>
                     <li><a className="dropdown-item profile-edit sign-out" href="landing-page.html">Sign Out</a></li>
                   </ul>
                 </div>
@@ -466,6 +454,8 @@ const Search = () => {
         crossOrigin="anonymous"
       ></script>
     </div>
+    <ListShelter />
+    </> 
   );
 };
 

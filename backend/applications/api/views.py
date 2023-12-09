@@ -14,9 +14,30 @@ from rest_framework.pagination import PageNumberPagination
 
 class ApplicationsView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
     permission_classes = [IsShelterUser|IsSeekerUser, HasApplicationPermission]
-    queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
     pagination_class= PageNumberPagination
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_seeker:
+            seeker = Seeker.objects.get(user=user)
+            applications = Application.objects.filter(pet_seeker=seeker)
+        else:
+            shelter = Shelter.objects.get(user=user)
+            applications = Application.objects.filter(shelter=shelter)
+
+        app_status = self.request.query_params.get('status', None)
+        if app_status is not None:
+            applications = applications.filter(status=app_status)
+
+        ordering = self.request.query_params.get('ordering', '-created_at')
+        applications = applications.order_by(ordering)
+
+        return applications
+
+    def retrieve(self, request, *args, **kwargs):
+        print(request)
+        return super().retrieve(request, *args, **kwargs)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -123,22 +144,16 @@ class ApplicationsView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixin
         return super().update(request, *args, **kwargs)
     
     def list(self, request, *args, **kwargs):
-        user = self.request.user
-        if user.is_seeker:
-            seeker = Seeker.objects.get(user=user)
-            applications = Application.objects.filter(pet_seeker=seeker)
-        else:
-            shelter = Shelter.objects.get(user=user)
-            applications = Application.objects.filter(shelter=shelter)
+        queryset = self.get_queryset()
 
-        app_status = self.request.query_params.get('status', None)
-        if app_status is not None:
-            applications = applications.filter(status=app_status)
+        search_query = self.request.query_params.get('search', None)
+        if search_query:
+            queryset = queryset.filter(name__icontains=search_query)
 
-        ordering = self.request.query_params.get('ordering')
-        if ordering:
-            applications = applications.order_by(ordering)
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
 
-        serializer = ApplicationSerializer(applications, many=True)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_200_OK, headers=headers)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
