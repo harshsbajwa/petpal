@@ -14,6 +14,9 @@ import SeekerNavComponent from '../../components/SeekerNavComponent';
 
 
 
+
+
+
 const Search = () => {
 
     const [error, setError] = useState("");
@@ -32,6 +35,10 @@ const Search = () => {
         Authorization: access_token,
         'Content-Type': 'application/json', // Adjust content type as needed
       };
+
+    var page = 1;
+
+
 
     var page = 1;
 
@@ -164,14 +171,11 @@ const Search = () => {
             // handle_submit();
 
             })
+            // handle_submit();
 
-        })
+            })
 
-        .catch(error => {
-            setError(error);
-        });
-
-        event.preventDefault();
+        }
     }
 
   return (
