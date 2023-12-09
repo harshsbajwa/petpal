@@ -19,6 +19,9 @@ import Search from "./pages/Search";
 import ApplicationList from "./pages/ApplicationList";
 import Application from "./pages/Application";
 import Shelterdetail from './pages/ShelterDetail';
+import ListShelter from './pages/ListShelter';
+import SeekerDetail from './pages/SeekerDetail';
+import SeekerUpdate from './pages/SeekerUpdate/index';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -39,6 +42,9 @@ function App() {
             </Route>
             <Route path="/applications" element={<ApplicationList />} />
             <Route path="/application/:params" element={<Application />} />
+            <Route path='/list/shelter' element={<ListShelter />} />
+            <Route path='/seeker/detail' element={<SeekerDetail />} />
+            <Route path='/seeker/update/' element={<SeekerUpdate />} />
           </Routes>
         </BrowserRouter>
       </IsShelterContext.Provider>

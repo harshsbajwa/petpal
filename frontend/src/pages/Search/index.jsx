@@ -8,6 +8,7 @@ import { useState, useContext } from 'react';
 import { ajax } from '../../ajax';
 import { TokenContext } from '../../context/TokenContext';
 import { IsShelterContext } from '../../context/IsShelterContext';
+import ListShelter from '../ListShelter';
 
 
 
@@ -173,6 +174,7 @@ const Search = () => {
     }
 
   return (
+    <>
     <div>
       <div className="header">
         {/* Your Navbar */}
@@ -206,7 +208,7 @@ const Search = () => {
                   <ul className="dropdown-menu dropdown-menu-lg-end">
                     <li className="profile-name">JimmyBobJoe</li>
                     <li className="profile-type">Seeker</li>
-                    <li><a className="dropdown-item profile-edit" href="UserAccountUpdate.html">Edit</a></li>
+                    <li><Link to="/seeker/detail" className="dropdown-item profile-edit">Edit</Link></li>
                     <li><a className="dropdown-item profile-edit sign-out" href="landing-page.html">Sign Out</a></li>
                   </ul>
                 </div>
@@ -448,6 +450,8 @@ const Search = () => {
         crossOrigin="anonymous"
       ></script>
     </div>
+    <ListShelter />
+    </> 
   );
 };
 
