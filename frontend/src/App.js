@@ -18,6 +18,7 @@ import { IsShelterContext } from "./context/IsShelterContext";
 import Search from "./pages/Search";
 import ApplicationList from "./pages/ApplicationList";
 import Application from "./pages/Application";
+import Shelterdetail from './pages/ShelterDetail';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -31,6 +32,7 @@ function App() {
             <Route index element={<Login />} />
             <Route path="/seeker-register" element={<SeekerRegister />} />
             <Route path="/shelter-register" element={<ShelterRegister />} />
+            <Route path='/shelter-detail' element={<Shelterdetail />} />
             <Route path="/shelter-register-add-pet" element={<AddPet />} />
             <Route element={<ProtectedSeekerRoutes />}>
               <Route path="/search-page" element={<Search />} />
