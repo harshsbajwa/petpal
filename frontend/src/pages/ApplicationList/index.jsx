@@ -21,12 +21,45 @@ const ApplicationList = () => {
             try {
                 console.log(token);
 
-                let url = 'http://localhost:8000/api/applications/?page=';
-                url += currentPage; 
-                url += searchTerm.length != 0 ? `&search=${searchTerm}` : "";
-                url += filterStatus.length != 0 ? `&status=${filterStatus}` : "";
-                url += sortOrder.length != 0 ? `&ordering=${sortOrder}` : "";
-                url += `&perpage=${applicationsPerPage}`;
+                let isFirst = 0;
+                let url = 'http://localhost:8000/api/applications/';
+
+                if (currentPage != 1) {
+                    if (isFirst == 0) {
+                        url += `?page=${currentPage}`;
+                        ++isFirst;
+                    }
+                    else {
+                        url += `&page=${currentPage}`;
+                    }
+                }
+                if (searchTerm.length != 0) {
+                    if (isFirst == 0) {
+                        url += `?search=${searchTerm}`;
+                        ++isFirst;
+                    }
+                    else {
+                        url += `&search=${searchTerm}`;
+                    }
+                }
+                if (filterStatus.length != 0) {
+                    if (isFirst == 0) {
+                        url += `?status=${filterStatus}`;
+                        ++isFirst;
+                    }
+                    else {
+                        url += `&status=${filterStatus}`;
+                    }
+                }
+                if (sortOrder.length != 0) {
+                    if (isFirst == 0) {
+                        url += `?ordering=${sortOrder}`;
+                        ++isFirst;
+                    }
+                    else {
+                        url += `&ordering=${sortOrder}`;
+                    }
+                }
                 
                 const response = await axios.get(url, {
                     headers: {
@@ -37,6 +70,7 @@ const ApplicationList = () => {
 
                 console.log("rd: " + response.data.results);
                 setApplications(response.data.results);
+                setTotalPages(Math.ceil(response.data.count / applicationsPerPage));
                 console.log(applications)
 
                 const applicationsWithDetails = await Promise.all(
@@ -111,10 +145,10 @@ const ApplicationList = () => {
                 </ul>
             </div>
             <div class="text-center mt-4">
-                { currentPage > 1 
+                { currentPage > 1
                     ? <button class="btn btn-primary m-2" onClick={()=>{setCurrentPage(currentPage - 1)}} >Previous Page</button>
                     : <></> }
-                { currentPage <= totalPages && currentPage > 1
+                { currentPage < totalPages
                     ? <button class="btn btn-primary m-2" onClick={()=>{setCurrentPage(currentPage + 1)}} >Next Page</button>
                     : <></> }
                 <p>Page {currentPage} out of {totalPages}.</p>

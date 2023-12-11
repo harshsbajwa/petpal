@@ -42,6 +42,7 @@ const Application = () => {
     const [postalCodeError, setPostalCodeError] = useState(null);
 
     const [newStatus, setNewStatus] = useState(null);
+    const [applicationDenied, setApplicationDenied] = useState(false);
 
     const {token, setToken} = useContext(TokenContext);
 
@@ -266,7 +267,7 @@ const Application = () => {
         <div class="container mt-5">
             <div class="form-container">
                 <form class="form-group" onSubmit={handleSubmit}>
-                    <fieldset disabled={isSubmitted}>
+                    <fieldset disabled={isSubmitted || applicationDenied}>
                     <h1> Pet Adoption Form </h1>
                     <div class="form-row">
                         <div class="form-group col-md-6 col-12">
@@ -359,7 +360,7 @@ const Application = () => {
 
                     <div className="form-row">
                         <div className="form-group col-12">
-                            <button type="submit" className="btn btn-primary mt-3">
+                            <button type="submit" className="btn btn-primary mt-3 col-12">
                                 Submit
                             </button>
                         </div>
@@ -369,7 +370,7 @@ const Application = () => {
                 </form>
 
                 <div className="form-row">
-                        {isSubmitted && (
+                        {!applicationDenied && isSubmitted && (
                             <div className="form-group col-12 mt-2">
                                 <label htmlFor="inputStatus" className="form-label">Update Status:</label>
                                 <select
@@ -401,13 +402,19 @@ const Application = () => {
                                 </button>
                             </div>
                         )}
+                        {applicationDenied && (
+                            <h1>Your application was denied.</h1>
+                        )}
                     </div>
+
+                <div className="form-group col-12">
+                    <Link to="/applications">
+                        <button className="btn btn-primary mt-3 col-12">View All Applications</button>
+                    </Link>
+                </div>
 
             </div>
         </div>
-
-        
-
     )
 }
 

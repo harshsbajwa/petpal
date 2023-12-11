@@ -18,10 +18,6 @@ class ApplicationsView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixin
     pagination_class= PageNumberPagination
 
     def get_queryset(self):
-        page = self.request.query_params.get('perpage', None)
-        if page is not None:
-            PageNumberPagination.page_size = page
-
         user = self.request.user
         if user.is_seeker:
             seeker = Seeker.objects.get(user=user)
