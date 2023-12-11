@@ -18,6 +18,10 @@ class ApplicationsView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixin
     pagination_class= PageNumberPagination
 
     def get_queryset(self):
+        page = self.request.query_params.get('perpage', None)
+        if page is not None:
+            PageNumberPagination.page_size = page
+
         user = self.request.user
         if user.is_seeker:
             seeker = Seeker.objects.get(user=user)
@@ -148,7 +152,9 @@ class ApplicationsView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixin
 
         search_query = self.request.query_params.get('search', None)
         if search_query:
-            queryset = queryset.filter(name__icontains=search_query)
+            pets = PetListing.objects.filter(name__icontains=search_query)
+            pet_ids = pets.values_list('id', flat=True)
+            queryset = queryset.filter(pet_listing__in=pet_ids)
 
         page = self.paginate_queryset(queryset)
         if page is not None:

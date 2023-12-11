@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
+import axios, { all } from 'axios';
 import { Link } from 'react-router-dom';
 import { TokenContext } from '../../context/TokenContext';
 import './styles.css';
@@ -10,13 +10,25 @@ const ApplicationList = () => {
     
     const [searchTerm, setSearchTerm] = useState('');
     const [filterStatus, setFilterStatus] = useState('');
-    const [sortOrder, setSortOrder] = useState('date');
+    const [sortOrder, setSortOrder] = useState('created_at');
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [applicationsPerPage] = useState(2);
 
     useEffect(() => {
         const fetchApplications = async () => {
             try {
                 console.log(token);
-                const response = await axios.get('http://localhost:8000/api/applications/', {
+
+                let url = 'http://localhost:8000/api/applications/?page=';
+                url += currentPage; 
+                url += searchTerm.length != 0 ? `&search=${searchTerm}` : "";
+                url += filterStatus.length != 0 ? `&status=${filterStatus}` : "";
+                url += sortOrder.length != 0 ? `&ordering=${sortOrder}` : "";
+                url += `&perpage=${applicationsPerPage}`;
+                
+                const response = await axios.get(url, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json',
@@ -25,6 +37,7 @@ const ApplicationList = () => {
 
                 console.log("rd: " + response.data.results);
                 setApplications(response.data.results);
+                console.log(applications)
 
                 const applicationsWithDetails = await Promise.all(
                     response.data.results.map(async (application, index) => {
@@ -57,35 +70,7 @@ const ApplicationList = () => {
         };
 
         fetchApplications();
-    }, [token]);
-
-    const filteredApplications = [];
-    for (let i = 0; i < applications.length; i++) {
-        if ((searchTerm ? applications[i].pet_name.toLowerCase().includes(searchTerm) : true)
-            && (filterStatus ? applications[i].status === filterStatus : true)) {
-                filteredApplications.push(applications[i]);    
-        }
-    }
-    const filteredAndSortedApplications = filteredApplications.sort((a, b) => {
-        if (sortOrder === 'date') {
-            return new Date(b.created_at) - new Date(a.created_at);
-        } 
-        else if (sortOrder === 'alphabetical') {
-            return a.pet_name.localeCompare(b.pet_name);
-        }
-        return 0;
-    });
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const [applicationsPerPage] = useState(2);
-    const indexOfLastApplication = currentPage * applicationsPerPage;
-    const indexOfFirstApplication = indexOfLastApplication - applicationsPerPage;
-    const currentApplications = filteredAndSortedApplications.slice(indexOfFirstApplication, indexOfLastApplication);
-    const paginate = pageNumber => setCurrentPage(pageNumber);
-    const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(filteredAndSortedApplications.length / applicationsPerPage); i++) {
-        pageNumbers.push(i);
-    }
+    }, [searchTerm, filterStatus, setSortOrder, currentPage, token]);
 
     return (
         <div className="container mt-5" style={{ backgroundColor: "salmon", textAlign: 'center' }}>
@@ -125,11 +110,15 @@ const ApplicationList = () => {
                     ))}
                 </ul>
             </div>
-            {pageNumbers.map(number => (
-                <li key={number} className={number === currentPage ? 'active' : ''}>
-                    <button onClick={() => paginate(number)}>{number}</button>
-                </li>
-            ))}
+            <div class="text-center mt-4">
+                { currentPage > 1 
+                    ? <button class="btn btn-primary m-2" onClick={()=>{setCurrentPage(currentPage - 1)}} >Previous Page</button>
+                    : <></> }
+                { currentPage <= totalPages && currentPage > 1
+                    ? <button class="btn btn-primary m-2" onClick={()=>{setCurrentPage(currentPage + 1)}} >Next Page</button>
+                    : <></> }
+                <p>Page {currentPage} out of {totalPages}.</p>
+            </div>
         </div>
     );
 };

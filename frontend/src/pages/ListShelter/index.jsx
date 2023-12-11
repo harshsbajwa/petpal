@@ -9,8 +9,6 @@ const ListShelter = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-    
-
     useEffect(() => {
         // Fetch data from the shelters API with the bearer token
         const fetchData = async () => {
@@ -24,7 +22,7 @@ const ListShelter = () => {
                 const response = await fetch(`http://127.0.0.1:8000/api/shelters/?page=${page}`, config);
                 const json = await response.json();
                 setResponse(json.results); // Update state with shelters data
-                setTotalPages(Math.ceil(json.count/2));
+                setTotalPages(Math.ceil(json.count / 2));
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -48,8 +46,6 @@ const ListShelter = () => {
                     ? <button class="btn btn-primary m-2" onClick={()=>{setPage(page + 1)}} >Next Page</button>
                     : <></> }
                     <p>Page {page} out of {totalPages}.</p>
-                    
-                    
                 </div>
             </div>
         </div>

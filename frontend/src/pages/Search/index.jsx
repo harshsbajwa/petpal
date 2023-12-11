@@ -166,7 +166,7 @@ const Search = () => {
             })
 
         }
-
+    
   return (
     <>
     <div>

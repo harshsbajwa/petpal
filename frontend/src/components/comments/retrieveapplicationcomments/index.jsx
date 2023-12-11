@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { TokenContext } from '../../../context/TokenContext';
 
 /*const ApplicationCommentsList = ({ application, user }) => {
   const [comments, setComments] = useState([]);
@@ -24,30 +25,27 @@ import { useNavigate } from 'react-router-dom';
 const ApplicationCommentsList = ({ application, user }) => {
     let navigate = useNavigate();
     const [comments, setComments] = useState([]);
-  
+    const {token, setToken} = useContext(TokenContext)
+
     useEffect(() => {
-      if (!user || !user.accessToken) {
+      if (!token) {
         navigate("/login"); //REPLACE
       }
       else {
-        if(application.pet_seeker.user == user || application.shelter.user == user) {
-            const getComments = async () => {
-                try {
-                  const response = await axios.get(`user/comments/application/${application.id}/`, {
-                    headers: { Authorization: `Bearer ${user.accessToken}` },
-                  });
-                  setComments(response.data);
-                } catch (error) {
-                  console.error('Error fetching comments:', error);
-                }
-              };
-          
-              getComments();
+        // TODO: CHECK PERMISSIONS
+          const getComments = async () => {
+              try {
+                const response = await axios.get(`user/comments/application/${application.id}/`, {
+                  headers: { Authorization: `Bearer ${user.accessToken}` },
+                });
+                setComments(response.data);
+              } catch (error) {
+                console.error('Error fetching comments:', error);
+              }
+            };
+        
+            getComments();
         }
-        else {
-            console.log("You have no access to this function");
-        }
-      }
     }, [user, application.id]);
 
     return (
