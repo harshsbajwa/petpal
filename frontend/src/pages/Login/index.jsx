@@ -51,7 +51,10 @@ const Login = () => {
     useEffect(() => {
         console.log("this is the token for login " + token);
         console.log("isShelter is " + isShelter);
-        if (isShelter === false) {navigate("/search-page")};
+        if (isShelter === false) {navigate("/search-page")}
+        else if (isShelter == true){
+            navigate("/shelter-detail");
+        };
     }, [isShelter])
     
     return(

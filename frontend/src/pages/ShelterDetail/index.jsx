@@ -1,235 +1,373 @@
-import React from 'react';
-import  { useContext, useEffect } from 'react';
-import ReactDOM from 'react-dom/client';
-import { createRoot } from 'react-dom/client';
-// import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import './style.css'; // Import your custom CSS
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { ajax } from '../../ajax';
-import { TokenContext } from '../../context/TokenContext';
-import { IsShelterContext } from '../../context/IsShelterContext';
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import AddPet from "../AddPet";
+import { TokenContext } from "../../context/TokenContext";
+import MainComponent from '../../components/PetlistingPaginationComponent/MainComponent';
+import ShelterNavComponent from "../../components/ShelterNavComponent";
 
-const Shelterdetail = () => {
-    var ajaxflag = 0;
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
-    const [locationAppended, setLocationAppended] = useState(false);
-    const [responseData, setResponseData] = useState(null);
+const ShelterRegister = () => {
+    const [username, setUsername] = useState("");
+    const [usernameError, setUsernameerror] = useState(false);
+    const [email, setEmail] = useState("");
+    const [emailError, setEmailerror] = useState(false);
+    const [password1, setP1] = useState("");
+    const [p1Error, setP1error] = useState(false);
+    const [password2, setP2] = useState("");
+    const [p2Error, setP2error] = useState(false);
+    const [shelter, setShelter] = useState("");
+    const [shelterError, setShelterError] = useState(false);
+    const [phone, setPhone] = useState("");
+    const [phoneError, setPhoneerror] = useState(false);
+    const [formError, setFormerror] = useState(false);
+    const [requestMessage, setRequestMessage] = useState({});
+    const [additional_preferences, setAP] = useState("");
+    const [location, setLocation] = useState("");
+
+    const [showPopup, setShowPopup] = useState(false);
+    let [ pets, setPets ] = useState([]);
+
     const {token, setToken} = useContext(TokenContext);
-    const {isShelter, setIsShelter} = useContext(IsShelterContext);
+    const [originalUser, setOriginalUser] = useState("");
 
-    const access_token = "Bearer " + token;
+    const [userData, setUserData] = useState({
+        username: "",
+        email: "",
+    });
+    const [prefilledData, setPrefilledData] = useState({
+        shelter_name:"",
+        phone: "",
+        location: "",
+        mission: ""
+    });
+
+    const togglePopup = () => {
+        setShowPopup(!showPopup);
+    };
+
+    const addPet = (newPet) => {
+        setPets([...pets, newPet])
+    }
     
-    const headers = {
-        Authorization: access_token,
-        'Content-Type': 'application/json', // Adjust content type as needed
+
+    const validateUsername = event => {
+        const value = event;
+        setUsername(value)
+        if (/\W/.test(value) || value.length < 1){
+            setUsernameerror(true);
+        }
+        else{
+            setUsernameerror(false);
+        }
+    }
+
+    const validateEmail = event =>{
+        console.log(pets);
+        const value = event;
+        setEmail(value);
+        let emailRegex = /^(?!.*\.\.)(?!.*_)[a-zA-Z0-9_.%+!-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;  
+        if (value === ""){
+            setEmailerror(true);
+        }
+        else if (!emailRegex.test(value)){
+            setEmailerror(true);
+        }
+        else {
+            setEmailerror(false);
+        }
+    }
+
+    const validatePassword1 = event =>{
+        const value = event;
+        setP1(value);
+        //tests whether is Username is not at least six characters long and only consist of letters (lowercase or uppercase), digits, and underscore
+        if (!(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/.test(value))){
+            setP1error(true);
+        }
+        else {
+            setP1error(false);
+        }
+    }
+
+    const validatePassword2 = event =>{
+        const value = event;
+        setP2(value);
+        let input1= password1;
+        //tests whether is Username is not at least six characters long and only consist of letters (lowercase or uppercase), digits, and underscore
+        if (!(input1 === value) || value.length === 0){
+            setP2error(true);
+        }
+        else {
+            setP2error(false);
+        }
+    }
+
+    const validateShelterName = event =>{
+        const value = event;
+        setShelter(value)
+        if (/\W/.test(value) || value.length < 1){
+            setShelterError(true);
+        }
+        else{
+            setShelterError(false);
+        }
+    }
+
+    const validatePhone = event =>{
+        const value = event;
+        setPhone(value);
+        //tests whether is Username is not at least six characters long and only consist of letters (lowercase or uppercase), digits, and underscore
+        let phoneRegex = /^\d{3}-\d{3}-\d{4}$/;
+        if (value === ""){
+            setPhoneerror(false);
+        }
+        else if (!phoneRegex.test(value)){
+            setPhoneerror(true);
+        }
+        else {
+            setPhoneerror(false);
+        }
+
+    }
+
+   
+    useEffect(() => {
+      const fetchData = async () => {
+          try {
+              if (!token) return;
+  
+              const config = {
+                  headers: { Authorization: `Bearer ${token}` }
+              };
+  
+              const response = await axios.patch('http://127.0.0.1:8000/api/user/', "{}", config);
+              const { user, shelter_name, phone, location, mission } = response.data;
+
+              setUserData(user);
+              setPrefilledData({ shelter_name, phone, location, mission });
+  
+              setUsername(user.username);
+              setOriginalUser(user.username);
+              setEmail(user.email);
+              setShelter(shelter_name);
+              setPhone(phone);
+              setLocation(location);
+              setAP(mission);
+          } catch (error) {
+              console.error("Error fetching data:", error);
+          }
       };
+  
+      fetchData();
+  }, [token]);
+
+
+  const validateForm = event =>{
+      const config = {
+          headers: { Authorization: `Bearer ${token}` }
+      };
+      setFormerror(false);
+      let payload = {
+          "user": {
+              "username": username===""?username:userData.username,
+              "email": email===""?email:userData.email,
+          },
+          "shelter_name":shelter===""?shelter:prefilledData.shelter_name,
+          "phone":phone===""?phone:prefilledData.phone,
+          "location":location===""?location:prefilledData.location,
+          "mission": additional_preferences===""?additional_preferences:prefilledData.mission
+      }
+      if (username === originalUser){
+          payload = {
+              "user": {
+                  "email": email===""?email:userData.email,
+              },
+              "shelter_name":shelter===""?shelter:prefilledData.shelter_name,
+              "phone":phone===""?phone:prefilledData.phone,
+              "location":location===""?location:prefilledData.location,
+              "mission": additional_preferences===""?additional_preferences:prefilledData.mission
+          }
+      }
+      
+
+      console.log(payload);
+      axios.patch('http://127.0.0.1:8000/api/user/', payload, config)
+      .then(response => {
+          setFormerror(false);
+          if (pets != []){
+              const config = {
+                  headers: { Authorization: `Bearer ${token}` }
+              };
+              for (const i in pets) {
+                  const petsPayload = {
+                      "name": pets[i].name,
+                      "about": pets[i].about,
+                      "breed": pets[i].breed,
+                      "age": pets[i].age,
+                      "gender": pets[i].gender,
+                      "size": pets[i].size,
+                      "status": pets[i].status
+                    };
+                  console.log(typeof(petsPayload))
+                  console.log(typeof(pets))
+                  axios.post( 
+                    'http://127.0.0.1:8000/user/petlistings/',
+                    petsPayload,
+                    config
+                  ).then(pets=[]).catch(console.log);
+              } 
+              
+              
+          }
+          })
+          .catch(error => {
+              setFormerror(true);
+              console.log(token)
+              console.log("created shelter but couldn't log in")
+              return false;
+      })
+      .catch(error => {
+          setFormerror(true);
+          setRequestMessage(error.response.data)
+          console.log(error.response.data)
+      });
+  }
     
-
-
-
-
-
-
-    function handle_update(){
-
-    }
-
-    
-    if(ajaxflag == 0){
-    //Need to change this from one to the shelter's id
-        ajax('/api/shelter/1/',{     //for now can do /?page=2 to view the second page etc
-            method: "GET",
-            headers: headers,
-        })
-        .then(request => request.json())
-        .then(json =>{
-            console.log(json)
-            ajaxflag = 1;
-            
-        var mydiv = document.getElementById('HomeSearch');
-        mydiv.className = "text-center container mt4";
-        mydiv.style.marginTop = '3rem';
-        var locationdiv = document.createElement('h3');
-        var missiondiv = document.createElement('h3');
-        var phonediv = document.createElement('h3');
-        var shelterdiv = document.createElement('h3');
-
-        if(json.shelter.shelter_name !== null){
-            shelterdiv.textContent = 'Shelter: ' + json.shelter.shelter_name;
-            mydiv.append(shelterdiv);
-        }
-        if(json.shelter.location !== null){
-            locationdiv.textContent = 'Location: ' + json.shelter.location;
-            mydiv.append(locationdiv);
-        }
-        if(json.shelter.mission !== null){
-            missiondiv.textContent = 'Mission: ' + json.shelter.mission;
-            mydiv.append(missiondiv);
-        }
-        if(json.shelter.phone !== null){
-            phonediv.textContent = 'Phone: ' + json.shelter.phone;
-            mydiv.append(phonediv);
-        }
-
-
-
-
-        //now for petlistings
-        json.petslistings.forEach(item => {
-
-            const outerDiv = document.createElement('div');
-            outerDiv.className = 'card';
-            outerDiv.style.width = '17rem';
-
-            //need to use the image
-
-            //this makes the card with the name and about 
-            const firstcardbody = document.createElement('div');
-            firstcardbody.className = 'card-body';
-            const firsth = document.createElement('h5');
-            firsth.textContent = 'Name: ' + item.name;
-            const firstp = document.createElement('p');
-            firstp.textContent = 'About: ' + item.about;
-
-            //
-            const ulist = document.createElement('ul');
-            ulist.className = 'list-group list-group-flush';
-            const firstli = document.createElement('li');
-            firstli.className = "list-group-item";
-            firstli.textContent = 'Breed: ' + item.breed;
-            const secondli = document.createElement('li');
-            secondli.className = "list-group-item";
-            secondli.textContent = 'Age: ' + item.age;
-            const thirdli = document.createElement('li');
-            thirdli.className = "list-group-item";
-            thirdli.textContent = 'Gender: ' + item.gender;
-            const fourthli = document.createElement('li');
-            fourthli.className = "list-group-item";
-            fourthli.textContent = 'Size: ' + item.size;
-            const fifthli = document.createElement('li');
-            fifthli.className = "list-group-item";
-            fifthli.textContent = 'Status: ' + item.status;
-            ulist.append(firstli, secondli, thirdli, fourthli, fifthli);
-
-            const secondcardbody = document.createElement('div');
-            secondcardbody.className = 'card-body';
-            secondcardbody.id = "centredcardbody";
-            const responsivediv = document.createElement('div');
-            responsivediv.id = "responsiveflex";
-            const detailsbutton = document.createElement('a');
-            detailsbutton.className = "btn btn-danger";
-            detailsbutton.id = "detailsbtn";
-            detailsbutton.href="pet-detail-page-error.html";
-            detailsbutton.textContent = "Details";
-            const adoptbutton = document.createElement('a');
-            adoptbutton.className = "btn btn-danger";
-            adoptbutton.id = "adoptbtn";
-            adoptbutton.href="pet-adoption-page-error.html";
-            adoptbutton.textContent = "Adopt";
-            
-            responsivediv.append(detailsbutton)
-            responsivediv.append(adoptbutton);
-            secondcardbody.append(responsivediv);
-
-
-
-
-            firstcardbody.append(firsth, firstp);
-            outerDiv.append(firstcardbody, ulist, secondcardbody);
-            document.getElementById('display').append(outerDiv);
-
-            //Now make a bunch of buttons for pagination
-            // const paginationdiv = document.getElementById('paginationdiv');
-            // while(json.next !== null){
-            //     const pagebutton = document.createElement('button');
-            //     pagebutton.className = 'btn btn-danger';
-            //     pagebutton.textContent = page;
-            //     paginationdiv.append(pagebutton);
-            //     page++;
-            //     console.log(page);
-            // }
-            
-            // handle_submit();
-
-            })
-
-        })
-    }
-
-    
-
-
-    
-      return (
-        <div>
-          <div className="header">
-            {/* Your Navbar */}
-            <nav className="navbar navbar-expand-lg">
-                <div className="container-fluid nav-container">
-                  <a href="#" className="navbar-brand">PetPal</a>
-                  <button className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
-                    <span className="navbar-toggler-icon"></span>
-                  </button>
-                  <div className="collapse navbar-collapse" id="nav">
-                    <ul className="navbar-nav">
-                    <li className="nav-item">
-                      <a href="#" className="nav-link active">Home</a>
-                    </li>
-                    <li className="nav-item dropdown">
-                      <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Notifications</a>
-                      <ul className="dropdown-menu">
-                        <li className="dropdown-item">Notification 1</li>
-                        <li className="dropdown-item">Notification 2</li>
-                        <li className="dropdown-item">Notification 3</li>
-                      </ul>
-                    </li>
-                    <li className="nav-item">
-                      <a href="my-applications.html" className="nav-link">My Applications</a>
-                    </li>
-                    </ul>
-                    <div className="dropdown profile-box">
-                      <button type="button" className="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                        Profile
-                      </button>
-                      <ul className="dropdown-menu dropdown-menu-lg-end">
-                        <li className="profile-name">JimmyBobJoe</li>
-                        <li className="profile-type">Seeker</li>
-                        <li><a className="dropdown-item profile-edit" href="UserAccountUpdate.html">Edit</a></li>
-                        <li><a className="dropdown-item profile-edit sign-out" href="landing-page.html">Sign Out</a></li>
-                      </ul>
+    return(
+        <>
+        <ShelterNavComponent />
+        <div className="d-flex justify-content-center align-items-center min-vh-100 mt-5 mb-5">
+        <div className="border bg-white shadow box-area row">
+            <div className="title w-100">PetPal</div>
+            <div className="subtitle">Are you looking to adopt a pet? <Link to="/seeker-register" className="redlink">Create A Seeker Account</Link></div>
+            <div className="mb-4 subtitle w-100">Looking to put pets up for adoption? Create a Shelter Account below:</div>
+                <div className="left col-md-6">
+                    <div className="mb-3">
+                        <label htmlFor="username" className="form-label">
+                        Username
+                        </label>
+                        <input
+                        type="text"
+                        className={usernameError?"form-control error-label":"form-control"}
+                        id="username"
+                        name="username"
+                        value={userData.username}
+                        onChange={(event)=>{
+                          setUserData({ ...userData, username: event.target.value });
+                          validateUsername(event.target.value);}
+                        } 
+                        onClick={(event)=>validateUsername(event.target.value)} 
+                        />
+                    </div>                
+                    <div className="mb-3">
+                        <label htmlFor="emailInput" className="form-label">
+                        Email address
+                        </label>
+                        <input
+                        type="email"
+                        className={emailError?"form-control error-label":"form-control"}
+                        id="emailInput"
+                        name="email"
+                        value={userData.email}
+                        onChange={event =>{
+                          setUserData({ ...userData, email: event.target.value });
+                          validateEmail(event.target.value);} 
+                        }
+                        onClick={event =>validateEmail(event.target.value)} 
+                        />
                     </div>
-                  </div>
-                  
+                    <div className="mb-3 pr-0">
+                        <label htmlFor="shelterName" className="form-label">Shelter Name</label>
+                        <input type="sname" className={shelterError?"form-control error-label":"form-control"} id="shelterName" name="sname" autoComplete="name" 
+                        value={userData.shelter_name}
+                        onChange={event =>{
+                          setUserData({ ...userData, shelter_name: event.target.value });
+                          validateEmail(event.target.value);} 
+                        }
+                        onClick={event=>validateShelterName(event.target.value)}
+                        />
+                    </div>
+                    </div>
+                <div className="right col-md-6">
+                    <div className="mb-3">
+                        <label htmlFor="phone" className="form-label">
+                        Phone Number
+                        </label>
+                        <input
+                        className={phoneError?"form-control error-label":"form-control"}
+                        id="phone"
+                        placeholder="888-888-8888"
+                        title="XXX-XXX-XXXX"
+                        required
+                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                        value={prefilledData.phone}
+                        onChange={event =>{
+                          setPrefilledData({ ...prefilledData, phone: event.target.value });
+                          validatePhone(event.target.value);}} 
+                        onClick={event =>validatePhone(event.target.value)} 
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="addressLine" className="form-label">
+                        Street Address
+                        </label>
+                        <input
+                        type="text"
+                        className="form-control"
+                        id="addressLine"
+                        name="addressLine"
+                        value={prefilledData.location}
+                        onChange={(event)=>{
+                            setPrefilledData({ ...prefilledData, location: event.target.value });
+                            setLocation(event.target.value);}} 
+                        onClick={(event)=>setLocation(event.target.value)} 
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="exampleFormControlTextarea1" className="mb-2">
+                            Missions Statement
+                        </label>
+                        <textarea
+                        className="form-control preferences"
+                        value={prefilledData.mission}
+                        onChange={(event)=>{
+                          setPrefilledData({ ...prefilledData, mission: event.target.value });
+                          setAP(event.target.value);}} 
+                        onClick={(event)=>setAP(event.target.value)} 
+                        id="exampleFormControlTextarea1"
+                        rows="2"
+                        ></textarea>
+                    </div>     
                 </div>
-              </nav>
-          </div>
-    
-          <div className="container mt-4" id="HomeSearch">
-            <h1>Shelter Detail Page</h1>
+                <div className="mb-2"> 
+                    <label htmlFor="addPet" className="w-100 mb-2"> Add a Pet Available for Adoption</label>
 
-    
-    
-    
-          </div>
-    
-          {/* The results div */}
-          <div className="container mt-4" name="results-placeholder" id='display'> 
-          
-          </div>
-    
-          <div id='paginationdiv'></div>
-    
-          <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossOrigin="anonymous"
-          ></script>
+                        <button type="button" className="btn btn-secondary mb-2" id="addPet"
+                        onClick={()=>togglePopup()}>Add Pet</button>
+                    {showPopup && (
+                        <div className="popup-overlay" onClick={togglePopup}>
+                        <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+                                <AddPet togglePopup={togglePopup} addPet={addPet}/>
+                        </div>
+                        </div>
+                    )}
+
+                </div> 
+                <MainComponent addedpets={pets} />
+                <div className="input-group mb-3">
+                <button
+                    type="submit"
+                    className="btn btn-primary w-100 fs-6"
+                    onClick={()=>{validateForm()}}
+                    >
+                    Update
+                </button>
+                {formError?<ul>{Object.keys(requestMessage).map(message=><li key={message}>{message}: {requestMessage[message]}</li>)}</ul>:<></>}
+                </div>
         </div>
-      );
+    </div>     
+    </>
+    )
+}
 
-
-    }
-
-    export default Shelterdetail;
+export default ShelterRegister;
