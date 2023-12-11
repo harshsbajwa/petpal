@@ -5,6 +5,7 @@ import { TokenContext } from '../../context/TokenContext';
 import './styles.css';
 import { ajax } from '../../ajax';
 import { IsShelterContext } from '../../context/IsShelterContext';
+import SeekerNavComponent from '../../components/SeekerNavComponent';
 
 const Application = () => {
     const [post, setPost] = useState(null);
@@ -264,6 +265,9 @@ const Application = () => {
     };
 
     return (
+        <>
+        <SeekerNavComponent />
+        
         <div class="container mt-5">
             <div class="form-container">
                 <form class="form-group" onSubmit={handleSubmit}>
@@ -415,6 +419,7 @@ const Application = () => {
 
             </div>
         </div>
+        </>
     )
 }
 

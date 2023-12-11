@@ -3,6 +3,7 @@ import axios, { all } from 'axios';
 import { Link } from 'react-router-dom';
 import { TokenContext } from '../../context/TokenContext';
 import './styles.css';
+import SeekerNavComponent from '../../components/SeekerNavComponent';
 
 const ApplicationList = () => {
     const [applications, setApplications] = useState([]);
@@ -107,6 +108,9 @@ const ApplicationList = () => {
     }, [searchTerm, filterStatus, setSortOrder, currentPage, token]);
 
     return (
+        <>
+        <SeekerNavComponent />
+        
         <div className="container mt-5" style={{ backgroundColor: "salmon", textAlign: 'center' }}>
             <div className="form-container">
                 <h1 className='app-list-title'>Application List</h1>
@@ -154,6 +158,7 @@ const ApplicationList = () => {
                 <p>Page {currentPage} out of {totalPages}.</p>
             </div>
         </div>
+        </>
     );
 };
 
