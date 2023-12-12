@@ -102,16 +102,17 @@ const ShelterRegister = () => {
         }
     }
 
-    const validateShelterName = event =>{
+    const validateShelterName = (event) => {
         const value = event;
-        setShelter(value)
-        if (/\W/.test(value) || value.length < 1){
-            setShelterError(true);
+        setShelter(value);
+        if (/^\s*$/.test(value)) {
+          setShelterError(true); // Empty value detected
+        } else if (/^[a-zA-Z0-9\s]*$/.test(value)) {
+          setShelterError(false); // Alphanumeric characters and spaces only
+        } else {
+          setShelterError(true); // Other characters detected
         }
-        else{
-            setShelterError(false);
-        }
-    }
+      };
 
     const validatePhone = event =>{
         const value = event;
@@ -278,11 +279,11 @@ const ShelterRegister = () => {
                     </div>
                     <div className="mb-3 pr-0">
                         <label htmlFor="shelterName" className="form-label">Shelter Name</label>
-                        <input type="sname" className={shelterError?"form-control error-label":"form-control"} id="shelterName" name="sname" autoComplete="name" 
-                        value={userData.shelter_name}
+                        <input type="sname" className={shelterError?"form-control error-label":"form-control"} id="shelterName" name="sname"
+                        value={prefilledData.shelter_name}
                         onChange={event =>{
-                          setUserData({ ...userData, shelter_name: event.target.value });
-                          validateEmail(event.target.value);} 
+                          setPrefilledData({ ...prefilledData, shelter_name: event.target.value });
+                          validateShelterName(event.target.value);} 
                         }
                         onClick={event=>validateShelterName(event.target.value)}
                         />
