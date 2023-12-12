@@ -1,5 +1,4 @@
 from rest_framework.permissions import BasePermission
-
 from applications.application import Application
 
 
@@ -18,6 +17,7 @@ class IsShelterUser(BasePermission):
             return False
         return bool(request.user and request.user.is_shelter)
 
+
 class SeekerShelterApplicationPair(BasePermission):
     ##must use with IsShelterUser
     def has_permission(self, request, view):
@@ -26,3 +26,4 @@ class SeekerShelterApplicationPair(BasePermission):
         applications = Application.objects.filter(shelter__user=shelter_user, pet_seeker_id=seeker_id)
         are_pair = applications.exists()
         return are_pair
+

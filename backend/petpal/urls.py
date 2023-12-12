@@ -41,4 +41,5 @@ urlpatterns = [
     path('', include('petlistings.urls')),
     path('', include('comments.urls')),
     path('', include('notifications.urls')),
+    path('', include('shelterblog.urls'))
 ]

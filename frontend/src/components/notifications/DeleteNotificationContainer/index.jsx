@@ -19,22 +19,24 @@ const DeleteNotificationContainer = (user, notification) => {
   }, []);
 
   const handleDelete = (notification) => {
-    try {
-        let deleteId = notification.id;
-        await fetch(`notifications/deletion/${notification.id}/`, {
-            method: 'DELETE',
-          });
+    if (user) {
+        try {
+            let deleteId = notification.id;
+            await fetch(`notifications/deletion/${notification.id}/`, {
+                method: 'DELETE',
+              });
+            
+              setNotifications((oldNotifs) =>
+              oldNotifs.filter(
+                (notification) => notification.id !== deleteId
+              )
+            );
         
-          setNotifications((oldNotifs) =>
-          oldNotifs.filter(
-            (notification) => notification.id !== deleteId
-          )
-        );
-    
+        }
+        catch (error) {
+            console.error('Error deleting notification:', error);
+          }
     }
-    catch (error) {
-        console.error('Error deleting notification:', error);
-      }
   }
 
   return (
@@ -43,7 +45,7 @@ const DeleteNotificationContainer = (user, notification) => {
         <NotificationComponent
           key={notification.id}
           notification={notification}
-          onDelete={() => handleDeleteNotification(notification)}
+          onDelete={() => handleDelete(notification)}
         />
       ))}
     </div>

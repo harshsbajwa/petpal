@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'notifications',
     'rest_framework',
     'comments',
+    'shelterblog',
     'rest_framework_swagger',
     "corsheaders",
 ]
