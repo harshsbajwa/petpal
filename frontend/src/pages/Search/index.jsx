@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 // import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import './style.css'; // Import your custom CSS
 import { useNavigate, Link } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect} from 'react';
 import { ajax } from '../../ajax';
 import { TokenContext } from '../../context/TokenContext';
 import { IsShelterContext } from '../../context/IsShelterContext';
@@ -18,8 +18,11 @@ const Search = () => {
     const [selectedStatus, setSelectedStatus] = useState('Any');
     const [selectedSort, setSelectedSort] = useState('None');
     const [selectedBreed, setSelectedBreed] = useState('Any');
+    const [response, setResponse] = useState(null);
     const [selectedAge, setSelectedAge] = useState('Any');
-    const [responseData, setResponseData] = useState(null);
+    const [search, setSearch] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [query, setQuery] = useState({search:'', page:1});
     const {token, setToken} = useContext(TokenContext);
     const {isShelter, setIsShelter} = useContext(IsShelterContext);
 
@@ -31,8 +34,84 @@ const Search = () => {
       };
 
     var page = 1;
+    
+    
 
-    function handle_submit(event) {
+    function printListings(json){
+      console.log(json) //
+      //need to clear the div here to avoid previous results from showing up
+      document.getElementById('display').replaceChildren(<div></div>);
+      document.getElementById('display').firstChild.remove();
+
+      json.forEach((item, index) => {
+      if(item.name.includes(search) && ((index >= 4 *(currentPage - 1)) && (index <= 4 * (currentPage) - 1))){
+
+      const outerDiv = document.createElement('div');
+      outerDiv.className = 'card';
+      outerDiv.style.width = '17rem';
+
+      //need to use the image
+
+      //this makes the card with the name and about 
+      const firstcardbody = document.createElement('div');
+      firstcardbody.className = 'card-body';
+      const firsth = document.createElement('h5');
+      firsth.textContent = 'Name: ' + item.name;
+      const firstp = document.createElement('p');
+      firstp.textContent = 'About: ' + item.about;
+
+      //
+      const ulist = document.createElement('ul');
+      ulist.className = 'list-group list-group-flush';
+      const firstli = document.createElement('li');
+      firstli.className = "list-group-item";
+      firstli.textContent = 'Breed: ' + item.breed;
+      const secondli = document.createElement('li');
+      secondli.className = "list-group-item";
+      secondli.textContent = 'Age: ' + item.age;
+      const thirdli = document.createElement('li');
+      thirdli.className = "list-group-item";
+      thirdli.textContent = 'Gender: ' + item.gender;
+      const fourthli = document.createElement('li');
+      fourthli.className = "list-group-item";
+      fourthli.textContent = 'Size: ' + item.size;
+      const fifthli = document.createElement('li');
+      fifthli.className = "list-group-item";
+      fifthli.textContent = 'Status: ' + item.status;
+      ulist.append(firstli, secondli, thirdli, fourthli, fifthli);
+
+      const secondcardbody = document.createElement('div');
+      secondcardbody.className = 'card-body';
+      secondcardbody.id = "centredcardbody";
+      const responsivediv = document.createElement('div');
+      responsivediv.id = "responsiveflex";
+      const detailsbutton = document.createElement('a');
+      detailsbutton.className = "btn btn-danger";
+      detailsbutton.id = "detailsbtn";
+      detailsbutton.href="pet-detail-page-error.html";
+      detailsbutton.textContent = "Details";
+      const adoptbutton = document.createElement('a');
+      adoptbutton.className = "btn btn-danger";
+      adoptbutton.id = "adoptbtn";
+      adoptbutton.href="pet-adoption-page-error.html";
+      adoptbutton.textContent = "Adopt";
+      
+      responsivediv.append(detailsbutton)
+      responsivediv.append(adoptbutton);
+      secondcardbody.append(responsivediv);
+
+      firstcardbody.append(firsth, firstp);
+      outerDiv.append(firstcardbody, ulist, secondcardbody);
+      document.getElementById('display').append(outerDiv);
+      }
+      })
+    }
+
+
+    
+
+
+    function handle_submit() {
         //first we're gonna build the url based on the selected sorts and filters
         var questionmarkflag = 0;
         var ajaxurl=`/user/petlistings/results/`;
@@ -72,97 +151,20 @@ const Search = () => {
             }
             ajaxurl= ajaxurl + `ordering=${selectedSort}`;
         }
+
+
         console.log(ajaxurl);
 
+
+        
         ajax(ajaxurl, {     //for now can do /?page=2 to view the second page etc
             method: "GET",
             headers: headers,
         })
         .then(request => request.json())
         .then(json => {
-            console.log(json) //
-            console.log(json.results[0])
-
-            //need to clear the div here to avoid previous results from showing up
-            document.getElementById('display').replaceChildren(<div></div>);
-            document.getElementById('display').firstChild.remove();
-
-            json.results.forEach(item => {
-
-            const outerDiv = document.createElement('div');
-            outerDiv.className = 'card';
-            outerDiv.style.width = '17rem';
-
-            //need to use the image
-
-            //this makes the card with the name and about 
-            const firstcardbody = document.createElement('div');
-            firstcardbody.className = 'card-body';
-            const firsth = document.createElement('h5');
-            firsth.textContent = 'Name: ' + item.name;
-            const firstp = document.createElement('p');
-            firstp.textContent = 'About: ' + item.about;
-
-            //
-            const ulist = document.createElement('ul');
-            ulist.className = 'list-group list-group-flush';
-            const firstli = document.createElement('li');
-            firstli.className = "list-group-item";
-            firstli.textContent = 'Breed: ' + item.breed;
-            const secondli = document.createElement('li');
-            secondli.className = "list-group-item";
-            secondli.textContent = 'Age: ' + item.age;
-            const thirdli = document.createElement('li');
-            thirdli.className = "list-group-item";
-            thirdli.textContent = 'Gender: ' + item.gender;
-            const fourthli = document.createElement('li');
-            fourthli.className = "list-group-item";
-            fourthli.textContent = 'Size: ' + item.size;
-            const fifthli = document.createElement('li');
-            fifthli.className = "list-group-item";
-            fifthli.textContent = 'Status: ' + item.status;
-            ulist.append(firstli, secondli, thirdli, fourthli, fifthli);
-
-            const secondcardbody = document.createElement('div');
-            secondcardbody.className = 'card-body';
-            secondcardbody.id = "centredcardbody";
-            const responsivediv = document.createElement('div');
-            responsivediv.id = "responsiveflex";
-            const detailsbutton = document.createElement('a');
-            detailsbutton.className = "btn btn-danger";
-            detailsbutton.id = "detailsbtn";
-            detailsbutton.href="pet-detail-page-error.html";
-            detailsbutton.textContent = "Details";
-            const adoptbutton = document.createElement('a');
-            adoptbutton.className = "btn btn-danger";
-            adoptbutton.id = "adoptbtn";
-            adoptbutton.href="pet-adoption-page-error.html";
-            adoptbutton.textContent = "Adopt";
-            
-            responsivediv.append(detailsbutton)
-            responsivediv.append(adoptbutton);
-            secondcardbody.append(responsivediv);
-
-            firstcardbody.append(firsth, firstp);
-            outerDiv.append(firstcardbody, ulist, secondcardbody);
-            document.getElementById('display').append(outerDiv);
-
-            //Now make a bunch of buttons for pagination
-            // const paginationdiv = document.getElementById('paginationdiv');
-            // while(json.next !== null){
-            //     const pagebutton = document.createElement('button');
-            //     pagebutton.className = 'btn btn-danger';
-            //     pagebutton.textContent = page;
-            //     paginationdiv.append(pagebutton);
-            //     page++;
-            //     console.log(page);
-            // }
-            
-            // handle_submit();
-
-            })
-            // handle_submit();
-
+            setResponse(json);
+            printListings(json);
             })
 
         }
@@ -182,6 +184,8 @@ const Search = () => {
             placeholder="Search for pets..."
             aria-label="Search for pets"
             aria-describedby="search-button"
+            id='searchinput'
+            
           />
 
 
@@ -191,7 +195,12 @@ const Search = () => {
               className="btn btn-danger btn-lg"
               type="button"
               id="search-button"
-              onClick={handle_submit}
+              onClick={() =>{
+                setSearch(document.getElementById('searchinput').value )
+                handle_submit();
+
+
+              }}
             >
               Search
             </a>
@@ -394,9 +403,31 @@ const Search = () => {
       {/* The results div */}
       <div className="container mt-4" name="results-placeholder" id='display'> 
       
+      
       </div>
 
-      <div id='paginationdiv'></div>
+      <div id='paginationdiv' className='pag'>
+      <button
+        className='btn btn-danger'
+        onClick={() => {
+          setCurrentPage(currentPage - 1);
+          console.log(currentPage);
+          printListings(response);
+        }}
+        >Previous</button>
+
+        <button
+        className='btn btn-danger'
+        onClick={() => {
+          setCurrentPage(currentPage + 1);
+          console.log(currentPage);
+          printListings(response);
+        }}
+        >Next
+        </button>
+      </div>
+            
+      
 
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
