@@ -26,6 +26,7 @@ import NotFound from "./pages/NotFound";
 import MainComponent from "./components/PetlistingPaginationComponent/MainComponent";
 import ShelterNavComponent from "./components/ShelterNavComponent";
 import ApplicationCommentsListCreate from "./components/comments/createapplicationcomments";
+import ShelterBlog from "./pages/ShelterBlog";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -56,6 +57,7 @@ function App() {
               <Route path="/seeker/update/" element={<SeekerUpdate />} />
             </Route>
             <Route element={<ProtectedShelterRoutes />}>
+              <Route path="/shelter-blog" element={<ShelterBlog />} />
               <Route path="/shelter-detail" element={<Shelterdetail />} />
               <Route
                 path="/shelter/mypets/"

@@ -10,7 +10,7 @@ const ShelterBlog = (shelter) => {
             const payload = {
                 "shelter": shelter,
                 "created_at": new Date(),
-                "text": text,
+                // "text": text,
             }
             let token = "";
 
@@ -43,7 +43,7 @@ const ShelterBlog = (shelter) => {
                </li>
                ))}
            </ul>
-           <form onSubmit={validateForm}> 
+           <form /*</div>onSubmit={validateForm}*/> 
                 <label>
                 Add Blogpost:
                 <input

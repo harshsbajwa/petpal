@@ -365,6 +365,15 @@ const ShelterRegister = () => {
                 </button>
                 {formError?<ul>{Object.keys(requestMessage).map(message=><li key={message}>{message}: {requestMessage[message]}</li>)}</ul>:<></>}
                 </div>
+                <div className="input-group mb-3">
+                <Link to="/shelter-blog">
+                <button
+                    className="btn btn-primary w-100 fs-6"
+                    >
+                    Shelter Blog
+                </button>
+                </Link>
+                </div>
         </div>
     </div>     
     </>
