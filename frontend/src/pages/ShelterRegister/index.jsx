@@ -85,16 +85,17 @@ const ShelterRegister = () => {
         }
     }
 
-    const validateShelterName = event =>{
+    const validateShelterName = (event) => {
         const value = event;
-        setShelter(value)
-        if (/\W/.test(value) || value.length < 1){
-            setShelterError(true);
+        setShelter(value);
+        if (/^\s*$/.test(value)) {
+          setShelterError(true); // Empty value detected
+        } else if (/^[a-zA-Z0-9\s]*$/.test(value)) {
+          setShelterError(false); // Alphanumeric characters and spaces only
+        } else {
+          setShelterError(true); // Other characters detected
         }
-        else{
-            setShelterError(false);
-        }
-    }
+      };
 
     const validatePhone = event =>{
         const value = event;
