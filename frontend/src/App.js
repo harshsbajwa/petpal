@@ -26,6 +26,9 @@ import NotFound from "./pages/NotFound";
 import MainComponent from "./components/PetlistingPaginationComponent/MainComponent";
 import ShelterNavComponent from "./components/ShelterNavComponent";
 import ApplicationCommentsListCreate from "./components/comments/createapplicationcomments";
+import NotificationPage from "./pages/NotificationPage/NotificationPage";
+import SeekerNavComponent from "./components/SeekerNavComponent";
+import PetListingDetails from "./pages/PetListingDetail/PetListingDetail";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -54,6 +57,7 @@ function App() {
               />
               <Route path="/seeker/detail" element={<SeekerDetail />} />
               <Route path="/seeker/update/" element={<SeekerUpdate />} />
+              <Route path="/notifications" element={<><SeekerNavComponent /> <NotificationPage /></>} />
             </Route>
             <Route element={<ProtectedShelterRoutes />}>
               <Route path="/shelter-detail" element={<Shelterdetail />} />
@@ -66,7 +70,9 @@ function App() {
                   </>
                 }
               />
+              <Route path="/notifications-shelter" element={<><ShelterNavComponent /> <NotificationPage /></>} />
             </Route>
+            <Route path="/pet-listing/:pk" element={<><SeekerNavComponent /><PetListingDetails /></>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

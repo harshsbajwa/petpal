@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../../context/TokenContext";
 import { useNavigate } from "react-router-dom";
 
-const NotifDropdownComponent = () => {
+const NotifShelterDropdownComponent = () => {
     const {token, setToken} = useContext(TokenContext);
     const [response, setResponse] = useState([]);
     const [page, setPage] = useState(1);
@@ -41,7 +41,7 @@ const NotifDropdownComponent = () => {
             { page < totalPages
             ? <button class="btn notif-btn " onClick={()=>{setPage(page + 1)}} >{">"}</button>
             : <></> }
-            <button class="btn ml-2 " onClick={()=>{navigate('/notifications')}} >#</button>
+            <button class="btn ml-2 " onClick={()=>{navigate('/notifications-shelter')}} >#</button>
         </div><div className="notif-btn-div">Page {page} out of {totalPages}.</div>
         </ul> 
                 
@@ -50,4 +50,4 @@ const NotifDropdownComponent = () => {
     
 }
 
-export default NotifDropdownComponent;
+export default NotifShelterDropdownComponent;

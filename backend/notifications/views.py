@@ -57,7 +57,6 @@ class UpdateNotificationView(UpdateAPIView):
     serializer_class = NotificationUpdateSerializer
     queryset = Notification.objects.all()
     def update(self, request, *args, **kwargs):
-        if self.get_object().recipient == self.request.user:
             notification = self.get_object()
             readValue = request.data.get('is_read')
 
@@ -66,8 +65,8 @@ class UpdateNotificationView(UpdateAPIView):
             
             serializer = self.get_serializer(notification)
             return Response(serializer.data)
-        else:
-            return Response("You do no have access to this notification", status=status.HTTP_400_BAD_REQUEST)
+        # else:
+        #     return Response("You do no have access to this notification", status=status.HTTP_400_BAD_REQUEST)
 
 class DeleteNotificationView(DestroyAPIView):
     permission_classes = [IsAuthenticated]

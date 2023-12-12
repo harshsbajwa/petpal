@@ -5,6 +5,7 @@ import { TokenContext } from "../../context/TokenContext";
 import { IsShelterContext } from "../../context/IsShelterContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import NotifShelterDropdownComponent from "../NotifShelterDropdownComponent/NotifShelterDropdownComponent";
 
 const ShelterNavComponent = () => {
     const {token, setToken} = useContext(TokenContext);
@@ -50,7 +51,7 @@ const ShelterNavComponent = () => {
                         </li>
                         <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Notifications</a>
-                        <NotifDropdownComponent />
+                        <NotifShelterDropdownComponent />
                         </li>
                         <li className="nav-item">
                         <Link to="/shelter/mypets/" className='nav-link'>My Pets</Link>
