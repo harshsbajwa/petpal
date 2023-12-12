@@ -41,15 +41,10 @@ const Application = () => {
     const [phoneNumberError, setPhoneNumberError] = useState(null);
     const [provinceError, setProvinceError] = useState(null);
     const [postalCodeError, setPostalCodeError] = useState(null);
-
     const [newStatus, setNewStatus] = useState(null);
     const [applicationDenied, setApplicationDenied] = useState(false);
-
     const {token, setToken} = useContext(TokenContext);
 
-    console.log("44: " + token);
-
-    const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
         const getApplication = async () => {
@@ -64,7 +59,26 @@ const Application = () => {
                 });
                 setPost(response.data);
                 setFormData(response.data.form);
-                setIsSubmitted(true);
+                
+                if (
+                    response.data.form.firstName != null &&
+                    response.data.form.lastName != null &&
+                    response.data.form.email != null &&
+                    response.data.form.phoneNumber != null &&
+                    response.data.form.address1 != null &&
+                    response.data.form.city != null &&
+                    response.data.form.province != null &&
+                    response.data.form.postalCode != null &&
+                    response.data.form.isAdult != null &&
+                    response.data.form.isEmployed != null &&
+                    response.data.form.houseType != null
+                ) {
+                    setIsSubmitted(true);
+                }
+                else {
+                    setIsSubmitted(false);
+                }
+                console.log("IS: " + isSubmitted)
             } catch (error) {
                 console.log(error);
             }

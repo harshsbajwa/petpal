@@ -75,12 +75,12 @@ class ApplicationsView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixin
             notification_serializer.save()
         """
 
-        user = self.request.user
-        sender = user
+        pet_seeker_id = serializer.validated_data.get('pet_seeker').id
+        pet_seeker = Seeker.objects.get(id=pet_seeker_id)
         shelter_id = serializer.validated_data.get('shelter').user.id
 
         notification_data = {
-            "sender": sender.id,
+            "sender": pet_seeker.user.id,
             "recipient": shelter_id,
             "message": "A new application is available for {}".format(pet_listing.name),
             "comment": None,
