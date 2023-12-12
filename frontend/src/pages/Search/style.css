@@ -185,6 +185,21 @@ nav .sign-out{
     margin-top: 5%;
    }
 
+.blue-text{
+    background-color: lightsalmon;
+}
+
+.notif-btn-div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.read-btn{
+    background-color: grey;
+}
+
  @media (max-width: 768px) { 
     body {
         padding: 0px 20px;

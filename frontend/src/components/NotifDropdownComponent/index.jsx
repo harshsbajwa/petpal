@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../../context/TokenContext";
+import { useNavigate } from "react-router-dom";
 
 const NotifDropdownComponent = () => {
     const {token, setToken} = useContext(TokenContext);
     const [response, setResponse] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Fetch data from the shelters API with the bearer token
@@ -29,26 +31,18 @@ const NotifDropdownComponent = () => {
         fetchData(); // Call the fetchData function
     }, [page, token]);
 
-    // return (
-    //     <ul className="dropdown-menu">
-    //         <li className="dropdown-item">Notification 1</li>
-    //         <li className="dropdown-item">Notification 2</li>
-    //         <li className="dropdown-item">Notification 3</li>
-    //     </ul>
-    // )
-
     return(
         <>
         <ul className="dropdown-menu">
-        {response.map((notification, index) => (<li key={index} className="dropdown-item">{notification.message}</li>)) }
-        <div>{ page > 1 
-            ? <button class="btn btn-primary m-2" onClick={()=>{setPage(page - 1)}} >{"<"}</button>
+        {response.map((notification, index) => (<li key={index} className={notification.is_read?"dropdown-item mb-1":"dropdown-item blue-text mb-1"}>{notification.message}</li>)) }
+        <div className="notif-btn-div">{ page > 1 
+            ? <button class="btn notif-btn" onClick={()=>{setPage(page - 1)}} >{"<"}</button>
             : <></> }
             { page < totalPages
-            ? <button class="btn btn-primary m-2 " onClick={()=>{setPage(page + 1)}} >{">"}</button>
+            ? <button class="btn notif-btn " onClick={()=>{setPage(page + 1)}} >{">"}</button>
             : <></> }
-            <p>Page {page} out of {totalPages}.</p>
-        </div>
+            <button class="btn ml-2 " onClick={()=>{navigate('/notifications')}} >#</button>
+        </div><div className="notif-btn-div">Page {page} out of {totalPages}.</div>
         </ul> 
                 
         </>

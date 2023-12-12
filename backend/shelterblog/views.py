@@ -10,6 +10,7 @@ from .serializers import ShelterBlogSerializer, BlogPostSerializer
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework import mixins, views
 
 
 class StandardResultsSetPagination(PageNumberPagination):
@@ -43,25 +44,30 @@ class RetreiveShelterBlog(ListAPIView):
     
 
 class RetrieveShelterBlogPost(RetrieveAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,]
     serializer_class = BlogPostSerializer
+    queryset = BlogPost.objects.all()
 
 
 class UpdateShelterBlogPost(UpdateAPIView):
-    permission_classes = [IsAuthor]
+    permission_classes = [IsAuthor,]
     serializer_class = BlogPostSerializer
 
 
 class CreateShelterBlogPost(CreateAPIView):
-    permission_classes = [IsMemberOfShelterBlog]
+    # permission_classes = [IsMemberOfShelterBlog,]
     serializer_class = BlogPostSerializer
 
     def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class DestroyShelterBlogPost(DestroyAPIView):
-    permission_classes = [IsAuthor]
+    permission_classes = [IsAuthor,]
     serializer_class = BlogPostSerializer
 
     def delete(self, request, *args, **kwargs):
@@ -69,35 +75,38 @@ class DestroyShelterBlogPost(DestroyAPIView):
 
 
 class ListShelterBlogPost(ListAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,]
     serializer_class = BlogPostSerializer
+    queryset = BlogPost.objects.all()
 
     def get(self, *args, **kwargs):
-        blog_id = self.kwargs.get('blogid')
+        queryset = self.get_queryset()
+
+        id = self.kwargs.get('pk1')
         
-        shelter_blog = get_object_or_404(ShelterBlog, id=blog_id)
+        shelterblog = get_object_or_404(ShelterBlog, id=id)
 
-        blogposts = BlogPost.objects.filter(blog=shelter_blog)
+        queryset = queryset.filter(parent=shelterblog)
 
-        category = self.request.POST['category']
+        category = self.request.query_params.get('category', None)
         if category is not None:
-            blogposts = blogposts.filter(category=category)
+            queryset = queryset.filter(category=category)
 
-        author = self.request.POST['author']
+        author = self.request.query_params.get('author', None)
         if author is not None:
-            blogposts = blogposts.filter(author=author)
+            queryset = queryset.filter(author=author)
 
         search_query = self.request.query_params.get('s', None)
         if search_query:
-            blogposts = BlogPost.objects.filter(title__icontains=search_query)
+            queryset = queryset.filter(title__icontains=search_query)
 
         ordering = self.request.query_params.get('ordering', '-created_at')
-        blogposts = blogposts.order_by(ordering)
+        queryset = queryset.order_by(ordering)
 
-        page = self.paginate_queryset(blogposts)
+        page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
 
-        serializer = self.get_serializer(blogposts, many=True)
+        serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

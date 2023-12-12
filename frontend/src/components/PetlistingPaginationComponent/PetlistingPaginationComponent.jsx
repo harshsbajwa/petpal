@@ -62,6 +62,7 @@ const CardComponent = (props) => {
               <li className="list-group-item">Age: {props.pet.age}</li>
               <li className="list-group-item">Status: {props.pet.status}</li>
               <button className="btn btn-primary" onClick={()=>{createApp()}}>Adopt</button>
+              <button className="btn btn-primary mt-4" onClick={()=>{navigate(`/pet-listing/${props.pet.id}`)}}>Details</button>
             </ul>
           </div>
         </div>

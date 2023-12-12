@@ -15,4 +15,4 @@ class IsMemberOfShelterBlog(BasePermission):
     Given a Blog Post, check if User belongs to the Shelter Blog.
     """
     def has_permission(self, request, view):
-        return True if (ShelterBlogger.objects.get(user=request.user, blog=request.blog)) else False
+        return True if (ShelterBlogger.objects.get(user=request.user, blog=request.data)) else False
