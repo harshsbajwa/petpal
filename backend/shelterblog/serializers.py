@@ -12,5 +12,6 @@ class ShelterBlogSerializer(ModelSerializer):
 class BlogPostSerializer(ModelSerializer):
     class Meta:
         model = BlogPost
-        exclude = ['id', 'created_at', 'cover_image', 'file', 'updated_on', 'views']
+        fields = '__all__'
         depth = 1
+    

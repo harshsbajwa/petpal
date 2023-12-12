@@ -10,6 +10,7 @@ from .serializers import ShelterBlogSerializer, BlogPostSerializer
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework import mixins, views
 
 
 class StandardResultsSetPagination(PageNumberPagination):
@@ -54,17 +55,14 @@ class UpdateShelterBlogPost(UpdateAPIView):
 
 
 class CreateShelterBlogPost(CreateAPIView):
-    permission_classes = [IsMemberOfShelterBlog,]
+    # permission_classes = [IsMemberOfShelterBlog,]
     serializer_class = BlogPostSerializer
 
     def create(self, request, *args, **kwargs):
-        print("we are here.. inseide. create.")
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            print("inside inside woww")
-            serializer.save(request.data)
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        print("outside oh no :(")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
