@@ -1,8 +1,54 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { TokenContext } from '../../context/TokenContext';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const CardComponent = (props) => {
+  const [seekerId, setSeekerId] = useState(0);
+  const [data, setData] = useState("");
+  const [appId, setAppId] = useState(0);
+  const { token, setToken } = useContext(TokenContext);
+
+  const navigate = useNavigate();
+
+  const createApp = async () => {
+    try {
+      if (!token) return;
+
+      const config = {
+        headers: { Authorization: `Bearer ${token}` }
+      };
+
+      // First, create a seeker
+      const seekerPayload = {}; // Add your seeker payload here
+      try {
+        const seekerResponse = await axios.patch(`http://127.0.0.1:8000/api/user/`, seekerPayload, config);
+        setSeekerId(seekerResponse.data.id);
+
+        // Then, create the application using the seekerId
+        const payload = {
+          "pet_seeker": seekerResponse.data.id,
+          "pet_listing": props.pet.id,
+          "shelter": props.pet.shelter,
+          "form": {},
+          "status": "pending"
+        };
+
+        const appResponse = await axios.post(`http://127.0.0.1:8000/api/applications/`, payload, config);
+        setData(appResponse.data);
+        setAppId(appResponse.data.id);
+
+        // Update the UI or navigate after setting the seekerId and appId
+        console.log(appResponse.data);
+        navigate(`/application/application=${appResponse.data.id}&shelter=${props.pet.shelter}&seeker=${seekerResponse.data.id}&pet=${props.pet.id}`);
+      } catch (error) {
+        console.error("Error creating application:", error);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+ 
     return (
       (props.name === "" || props.pet.name === props.name) && (
         <div className="card">
@@ -15,9 +61,11 @@ const CardComponent = (props) => {
               <li className="list-group-item">Breed: {props.pet.breed}</li>
               <li className="list-group-item">Age: {props.pet.age}</li>
               <li className="list-group-item">Status: {props.pet.status}</li>
+              <button className="btn btn-primary" onClick={()=>{createApp()}}>Adopt</button>
             </ul>
           </div>
         </div>
+  
       )
     );
   };

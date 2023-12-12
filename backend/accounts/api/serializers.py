@@ -80,7 +80,7 @@ class SeekerUpdateSerializer(serializers.ModelSerializer):
     user = UserUpdateSerializer()
     class Meta:
         model = Seeker
-        fields = ['user', 'phone', 'location', 'preferences']
+        fields = ['user', 'id', 'phone', 'location', 'preferences']
     
     def update(self, instance, validated_data):
         user_data = validated_data.pop('user', {})
