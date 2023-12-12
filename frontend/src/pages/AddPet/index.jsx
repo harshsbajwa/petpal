@@ -122,7 +122,7 @@ const AddPet = (props) => {
                         </div>
                         <div className="form-group col-md-3">
                             <label htmlFor="inputSize">Size</label>
-                            <input type="number" className="form-control" id="inputSize" placeholder="" 
+                            <input type="text" className="form-control" id="inputSize" placeholder="" 
                             onChange={(event)=>setSize(event.target.value)} 
                             onClick={(event)=>setSize(event.target.value)}/>
                         </div>
