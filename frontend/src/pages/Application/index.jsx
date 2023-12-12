@@ -71,6 +71,14 @@ const Application = () => {
         };
         getApplication();
     }, [token, applicationID]);
+
+    const app = {
+        "pet_seeker": seekerID,
+        "pet_listing": petID,
+        "shelter": shelterID,
+        "form": formData,
+        "status": "pending"
+    };  
     
     const validateEmail = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -240,18 +248,9 @@ const Application = () => {
         validateProvince();
         
         if (!emailError && !phoneNumberError && !postalCodeError && !provinceError) {
-            
-            const jsondata = {
-                "pet_seeker": seekerID,
-                "pet_listing": petID,
-                "shelter": shelterID,
-                "form": formData,
-                "status": "pending"
-            };  
-
             const postURL = `http://localhost:8000/api/applications/`;
             axios.post(postURL,
-                jsondata,
+                app,
                 {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',

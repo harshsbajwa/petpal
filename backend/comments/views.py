@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
 from rest_framework import status
 from notifications.serializers import NotificationSerializer
-from accounts.models import Shelter
+from accounts.models import Shelter, User, Seeker
 from applications.application import Application
 from .models import ApplicationComment, Comment
 from .serializers import ApplicationCommentSerializer, ShelterCommentSerializer, SpecificCommentSerializer
@@ -60,15 +60,16 @@ class ApplicationCommentsListCreate(ListCreateAPIView):
     
     def perform_create(self, serializer):
         application = get_object_or_404(Application, pk=self.kwargs['pk'])
+        seeker = get_object_or_404(Seeker, user=self.request.user)
+
         if application.pet_seeker.user == self.request.user or application.shelter.user == self.request.user:
             serializer.save(application=application, user=self.request.user)
 
-            user = self.request.user
-            sender = user
-            recipient = application.shelter.user
+            sender = seeker.user.id
+            recipient = application.shelter.user.id
             notification_data = {
-                "sender": sender.id,
-                "recipient": recipient.id,
+                "sender": sender,
+                "recipient": recipient,
                 "message": "A new comment is available on the application for {}".format(application.pet_listing.name),
                 "comment": None,
                 "application": serializer.instance

@@ -20,7 +20,6 @@ const Login = () => {
         .then(response => {
             setError(false);
             setToken(response.data.access);
-            
         })
         .catch(error => {
             setError(true);
@@ -44,13 +43,11 @@ const Login = () => {
         } 
     }
 
-    useEffect(() => {
+    useEffect(() => {        
         getUserType();
     }, [token])
    
     useEffect(() => {
-        console.log("this is the token for login " + token);
-        console.log("isShelter is " + isShelter);
         if (isShelter === false) {navigate("/search-page")}
         else if (isShelter == true){
             navigate("/shelter-detail");
