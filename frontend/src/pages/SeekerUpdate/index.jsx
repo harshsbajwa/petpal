@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { TokenContext } from '../../context/TokenContext';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import SeekerNavComponent from '../../components/SeekerNavComponent';
 
 const SeekerUpdate= () => {
 
@@ -207,6 +208,8 @@ const SeekerUpdate= () => {
     }
 
     return(
+        <>
+        <SeekerNavComponent />
         <div className="d-flex justify-content-center align-items-center min-vh-100">
         <div className="border bg-white shadow box-area row">
             <div className="title w-100">Update Your Profile</div>
@@ -354,7 +357,8 @@ const SeekerUpdate= () => {
             </Link>
             </div>
         </div>
-        </div>    
+        </div>
+        </>    
     )
 }
 export default SeekerUpdate;

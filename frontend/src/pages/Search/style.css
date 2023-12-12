@@ -46,6 +46,12 @@ img {
     margin: 1rem;
 }
 
+.pag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #display {
     display: flex;
     flex-wrap: wrap;
@@ -62,7 +68,7 @@ img {
 }
 
 #HomeSearch {
-    margin-bottom: 10rem;
+    margin-bottom: 1rem;
 }
 
 #welcome {

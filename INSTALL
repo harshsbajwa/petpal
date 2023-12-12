@@ -1,0 +1,30 @@
+# INSTALL DOCUMENTATION
+
+# To set up the backend, run the startup.sh file that can be found in the backend folder. 
+
+# These are the packages that should be installed through the startup.sh file:
+
+# Django REST framework
+# Django REST authentication
+# Django cors headers
+# Pillow package
+
+# Migrations should also be made through the startup.sh file.
+
+# Starting the django development server:
+# Run “python3 manage.py runserver”
+
+# Setting up the frontend:
+# Run “node” 
+# Install react dependencies:
+# Run “npm install react-router-dom”
+# Run “npm install react-dom”
+
+# Other packages:
+# Run “npm install axios”
+
+# Starting the react development server:
+# Run “npm start”
+
+# Running on Ubuntu 20.04.6 environment. 
+

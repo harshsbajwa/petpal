@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NotifDropdownComponent from "../NotifDropdownComponent";
 import Search from '../../pages/Search/index';
 import { TokenContext } from "../../context/TokenContext";
@@ -6,10 +6,11 @@ import { IsShelterContext } from "../../context/IsShelterContext";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 
-const SeekerNavComponent = () => {
+const ShelterNavComponent = () => {
     const {token, setToken} = useContext(TokenContext);
     const [username, setUsername] = useState("No User");
     const {isShelter, setIsShelter} = useContext(IsShelterContext);
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -52,7 +53,7 @@ const SeekerNavComponent = () => {
                         <NotifDropdownComponent />
                         </li>
                         <li className="nav-item">
-                        <Link to="/applications" className='nav-link'>Applications</Link>
+                        <Link to="/shelter/mypets/" className='nav-link'>My Pets</Link>
                         </li>
                         </ul>
                         <div className="dropdown profile-box">
@@ -62,8 +63,7 @@ const SeekerNavComponent = () => {
                         <ul className="dropdown-menu dropdown-menu-lg-end">
                             <li className="profile-name">{username}</li>
                             <li className="profile-type">{isShelter === true?"Shelter":"Seeker"}</li>
-                            <li><Link to="/seeker/update/" className="dropdown-item profile-edit">Edit</Link></li>
-                            <Link className="dropdown-item profile-edit sign-out" onClick={()=>{setToken(""); window.location.reload()}}>Sign Out</Link>
+                            <Link className="dropdown-item profile-edit sign-out" onClick={()=>{setToken(""); window.location.reload();}} >Sign Out</Link>
                         </ul>
                         </div>
                     </div>
@@ -75,4 +75,4 @@ const SeekerNavComponent = () => {
     )
     
 }
-export default SeekerNavComponent;
+export default ShelterNavComponent;

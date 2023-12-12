@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
+import axios, { all } from 'axios';
 import { Link } from 'react-router-dom';
 import { TokenContext } from '../../context/TokenContext';
 import './styles.css';
+import SeekerNavComponent from '../../components/SeekerNavComponent';
 
 const ApplicationList = () => {
     const [applications, setApplications] = useState([]);
@@ -10,13 +11,58 @@ const ApplicationList = () => {
     
     const [searchTerm, setSearchTerm] = useState('');
     const [filterStatus, setFilterStatus] = useState('');
-    const [sortOrder, setSortOrder] = useState('date');
+    const [sortOrder, setSortOrder] = useState('created_at');
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [applicationsPerPage] = useState(2);
 
     useEffect(() => {
         const fetchApplications = async () => {
             try {
                 console.log(token);
-                const response = await axios.get('http://localhost:8000/api/applications/', {
+
+                let isFirst = 0;
+                let url = 'http://localhost:8000/api/applications/';
+
+                if (currentPage != 1) {
+                    if (isFirst == 0) {
+                        url += `?page=${currentPage}`;
+                        ++isFirst;
+                    }
+                    else {
+                        url += `&page=${currentPage}`;
+                    }
+                }
+                if (searchTerm.length != 0) {
+                    if (isFirst == 0) {
+                        url += `?search=${searchTerm}`;
+                        ++isFirst;
+                    }
+                    else {
+                        url += `&search=${searchTerm}`;
+                    }
+                }
+                if (filterStatus.length != 0) {
+                    if (isFirst == 0) {
+                        url += `?status=${filterStatus}`;
+                        ++isFirst;
+                    }
+                    else {
+                        url += `&status=${filterStatus}`;
+                    }
+                }
+                if (sortOrder.length != 0) {
+                    if (isFirst == 0) {
+                        url += `?ordering=${sortOrder}`;
+                        ++isFirst;
+                    }
+                    else {
+                        url += `&ordering=${sortOrder}`;
+                    }
+                }
+                
+                const response = await axios.get(url, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json',
@@ -25,6 +71,8 @@ const ApplicationList = () => {
 
                 console.log("rd: " + response.data.results);
                 setApplications(response.data.results);
+                setTotalPages(Math.ceil(response.data.count / applicationsPerPage));
+                console.log(applications)
 
                 const applicationsWithDetails = await Promise.all(
                     response.data.results.map(async (application, index) => {
@@ -57,37 +105,12 @@ const ApplicationList = () => {
         };
 
         fetchApplications();
-    }, [token]);
-
-    const filteredApplications = [];
-    for (let i = 0; i < applications.length; i++) {
-        if ((searchTerm ? applications[i].pet_name.toLowerCase().includes(searchTerm) : true)
-            && (filterStatus ? applications[i].status === filterStatus : true)) {
-                filteredApplications.push(applications[i]);    
-        }
-    }
-    const filteredAndSortedApplications = filteredApplications.sort((a, b) => {
-        if (sortOrder === 'date') {
-            return new Date(b.created_at) - new Date(a.created_at);
-        } 
-        else if (sortOrder === 'alphabetical') {
-            return a.pet_name.localeCompare(b.pet_name);
-        }
-        return 0;
-    });
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const [applicationsPerPage] = useState(2);
-    const indexOfLastApplication = currentPage * applicationsPerPage;
-    const indexOfFirstApplication = indexOfLastApplication - applicationsPerPage;
-    const currentApplications = filteredAndSortedApplications.slice(indexOfFirstApplication, indexOfLastApplication);
-    const paginate = pageNumber => setCurrentPage(pageNumber);
-    const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(filteredAndSortedApplications.length / applicationsPerPage); i++) {
-        pageNumbers.push(i);
-    }
+    }, [searchTerm, filterStatus, setSortOrder, currentPage, token]);
 
     return (
+        <>
+        <SeekerNavComponent />
+        
         <div className="container mt-5" style={{ backgroundColor: "salmon", textAlign: 'center' }}>
             <div className="form-container">
                 <h1 className='app-list-title'>Application List</h1>
@@ -125,12 +148,17 @@ const ApplicationList = () => {
                     ))}
                 </ul>
             </div>
-            {pageNumbers.map(number => (
-                <li key={number} className={number === currentPage ? 'active' : ''}>
-                    <button onClick={() => paginate(number)}>{number}</button>
-                </li>
-            ))}
+            <div class="text-center mt-4">
+                { currentPage > 1
+                    ? <button class="btn btn-primary m-2" onClick={()=>{setCurrentPage(currentPage - 1)}} >Previous Page</button>
+                    : <></> }
+                { currentPage < totalPages
+                    ? <button class="btn btn-primary m-2" onClick={()=>{setCurrentPage(currentPage + 1)}} >Next Page</button>
+                    : <></> }
+                <p>Page {currentPage} out of {totalPages}.</p>
+            </div>
         </div>
+        </>
     );
 };
 

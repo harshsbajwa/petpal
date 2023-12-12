@@ -148,7 +148,9 @@ class ApplicationsView(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixin
 
         search_query = self.request.query_params.get('search', None)
         if search_query:
-            queryset = queryset.filter(name__icontains=search_query)
+            pets = PetListing.objects.filter(name__icontains=search_query)
+            pet_ids = pets.values_list('id', flat=True)
+            queryset = queryset.filter(pet_listing__in=pet_ids)
 
         page = self.paginate_queryset(queryset)
         if page is not None:
