@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import ShelterBlog, BlogPost
+from accounts.models import Shelter, User
 
 
 class ShelterBlogSerializer(ModelSerializer):
@@ -11,4 +12,5 @@ class ShelterBlogSerializer(ModelSerializer):
 class BlogPostSerializer(ModelSerializer):
     class Meta:
         model = BlogPost
-        fields = '__all__'
+        exclude = ['id', 'created_at', 'cover_image', 'file', 'updated_on', 'views']
+        depth = 1

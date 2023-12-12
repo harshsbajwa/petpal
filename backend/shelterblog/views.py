@@ -43,26 +43,33 @@ class RetreiveShelterBlog(ListAPIView):
     
 
 class RetrieveShelterBlogPost(RetrieveAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,]
     serializer_class = BlogPostSerializer
     queryset = BlogPost.objects.all()
 
 
 class UpdateShelterBlogPost(UpdateAPIView):
-    permission_classes = [IsAuthor]
+    permission_classes = [IsAuthor,]
     serializer_class = BlogPostSerializer
 
 
 class CreateShelterBlogPost(CreateAPIView):
-    permission_classes = [IsMemberOfShelterBlog]
+    permission_classes = [IsMemberOfShelterBlog,]
     serializer_class = BlogPostSerializer
 
     def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
+        print("we are here.. inseide. create.")
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            print("inside inside woww")
+            serializer.save(request.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print("outside oh no :(")
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class DestroyShelterBlogPost(DestroyAPIView):
-    permission_classes = [IsAuthor]
+    permission_classes = [IsAuthor,]
     serializer_class = BlogPostSerializer
 
     def delete(self, request, *args, **kwargs):
@@ -70,7 +77,7 @@ class DestroyShelterBlogPost(DestroyAPIView):
 
 
 class ListShelterBlogPost(ListAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated,]
     serializer_class = BlogPostSerializer
     queryset = BlogPost.objects.all()
 
