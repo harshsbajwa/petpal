@@ -2,7 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 
 const ShelterBlog = (shelter) => {
-    const [blogPosts, setBlogPost] = useState({});
+    const [blogPosts, setBlogPost] = useState([]);
     const [newBlogPostText, setNewBlogPostText] = useState({})
 
 
@@ -10,7 +10,7 @@ const ShelterBlog = (shelter) => {
             const payload = {
                 "shelter": shelter,
                 "created_at": new Date(),
-                "text": text,
+                "text": newBlogPostText,
             }
             let token = "";
 
@@ -28,7 +28,7 @@ const ShelterBlog = (shelter) => {
     return(
     <div class="container">
      <div class="mx-auto">
-        <h2 style="color: #FF5543">Our Shelter's Blog</h2>
+        <h2 style={{ color: "#FF5543" }}>Our Shelter's Blog</h2>
        <div> 
            <div class="row justify-content-center">
            <ul>

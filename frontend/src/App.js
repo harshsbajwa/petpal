@@ -26,6 +26,7 @@ import NotFound from "./pages/NotFound";
 import MainComponent from "./components/PetlistingPaginationComponent/MainComponent";
 import ShelterNavComponent from "./components/ShelterNavComponent";
 import ApplicationCommentsListCreate from "./components/comments/createapplicationcomments";
+import ShelterBlog from "./pages/ShelterBlog";
 import NotificationPage from "./pages/NotificationPage/NotificationPage";
 import SeekerNavComponent from "./components/SeekerNavComponent";
 import PetListingDetails from "./pages/PetListingDetail/PetListingDetail";
@@ -60,6 +61,7 @@ function App() {
               <Route path="/notifications" element={<><SeekerNavComponent /> <NotificationPage /></>} />
             </Route>
             <Route element={<ProtectedShelterRoutes />}>
+              <Route path="/shelter-blog" element={<ShelterBlog />} />
               <Route path="/shelter-detail" element={<Shelterdetail />} />
               <Route
                 path="/shelter/mypets/"
