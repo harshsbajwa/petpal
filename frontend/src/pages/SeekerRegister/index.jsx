@@ -307,7 +307,7 @@ const UserRegister = () => {
                 className="btn btn-primary w-100 fs-6"
                 onClick={()=>validateForm()}
                 >
-                Login
+                Sign Up
             </button>
             {formError?<ul>{Object.keys(requestMessage).map(message=><li key={message}>{message}: {requestMessage[message]}</li>)}</ul>:<></>}
             </div>
