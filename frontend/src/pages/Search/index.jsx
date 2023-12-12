@@ -10,165 +10,35 @@ import { TokenContext } from '../../context/TokenContext';
 import { IsShelterContext } from '../../context/IsShelterContext';
 import ListShelter from '../ListShelter';
 import SeekerNavComponent from '../../components/SeekerNavComponent';
+import PetlistingPaginationComponent from '../../components/PetlistingPaginationComponent/PetlistingPaginationComponent';
 
 const Search = () => {
 
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
-    const [selectedStatus, setSelectedStatus] = useState('Any');
-    const [selectedSort, setSelectedSort] = useState('None');
-    const [selectedBreed, setSelectedBreed] = useState('Any');
-    const [response, setResponse] = useState(null);
-    const [selectedAge, setSelectedAge] = useState('Any');
-    const [search, setSearch] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const [query, setQuery] = useState({search:'', page:1});
-    const {token, setToken} = useContext(TokenContext);
-    const {isShelter, setIsShelter} = useContext(IsShelterContext);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const [selectedStatus, setSelectedStatus] = useState('Any');
+  const [selectedSort, setSelectedSort] = useState('None');
+  const [selectedBreed, setSelectedBreed] = useState('Any');
+  const [response, setResponse] = useState(null);
+  const [selectedAge, setSelectedAge] = useState('Any');
+  const [search, setSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [query, setQuery] = useState({search:'', page:1});
+  const {token, setToken} = useContext(TokenContext);
+  const {isShelter, setIsShelter} = useContext(IsShelterContext);
+  const [url, setUrl] = useState("");
 
-    const access_token = "Bearer " + token;
-    console.log("this is the token"+token);
-    const headers = {
-        Authorization: access_token,
-        'Content-Type': 'application/json', // Adjust content type as needed
-      };
+  const access_token = "Bearer " + token;
+  console.log("this is the token"+token);
+  const headers = {
+      Authorization: access_token,
+      'Content-Type': 'application/json', // Adjust content type as needed
+    };
 
-    var page = 1;
-    
-    
+  var page = 1;
+  
 
-    function printListings(json){
-      console.log(json) //
-      //need to clear the div here to avoid previous results from showing up
-      document.getElementById('display').replaceChildren(<div></div>);
-      document.getElementById('display').firstChild.remove();
-
-      json.forEach((item, index) => {
-      if(item.name.includes(search) && ((index >= 4 *(currentPage - 1)) && (index <= 4 * (currentPage) - 1))){
-
-      const outerDiv = document.createElement('div');
-      outerDiv.className = 'card';
-      outerDiv.style.width = '17rem';
-
-      //need to use the image
-
-      //this makes the card with the name and about 
-      const firstcardbody = document.createElement('div');
-      firstcardbody.className = 'card-body';
-      const firsth = document.createElement('h5');
-      firsth.textContent = 'Name: ' + item.name;
-      const firstp = document.createElement('p');
-      firstp.textContent = 'About: ' + item.about;
-
-      //
-      const ulist = document.createElement('ul');
-      ulist.className = 'list-group list-group-flush';
-      const firstli = document.createElement('li');
-      firstli.className = "list-group-item";
-      firstli.textContent = 'Breed: ' + item.breed;
-      const secondli = document.createElement('li');
-      secondli.className = "list-group-item";
-      secondli.textContent = 'Age: ' + item.age;
-      const thirdli = document.createElement('li');
-      thirdli.className = "list-group-item";
-      thirdli.textContent = 'Gender: ' + item.gender;
-      const fourthli = document.createElement('li');
-      fourthli.className = "list-group-item";
-      fourthli.textContent = 'Size: ' + item.size;
-      const fifthli = document.createElement('li');
-      fifthli.className = "list-group-item";
-      fifthli.textContent = 'Status: ' + item.status;
-      ulist.append(firstli, secondli, thirdli, fourthli, fifthli);
-
-      const secondcardbody = document.createElement('div');
-      secondcardbody.className = 'card-body';
-      secondcardbody.id = "centredcardbody";
-      const responsivediv = document.createElement('div');
-      responsivediv.id = "responsiveflex";
-      const detailsbutton = document.createElement('a');
-      detailsbutton.className = "btn btn-danger";
-      detailsbutton.id = "detailsbtn";
-      detailsbutton.href="pet-detail-page-error.html";
-      detailsbutton.textContent = "Details";
-      const adoptbutton = document.createElement('a');
-      adoptbutton.className = "btn btn-danger";
-      adoptbutton.id = "adoptbtn";
-      adoptbutton.href="pet-adoption-page-error.html";
-      adoptbutton.textContent = "Adopt";
-      
-      responsivediv.append(detailsbutton)
-      responsivediv.append(adoptbutton);
-      secondcardbody.append(responsivediv);
-
-      firstcardbody.append(firsth, firstp);
-      outerDiv.append(firstcardbody, ulist, secondcardbody);
-      document.getElementById('display').append(outerDiv);
-      }
-      })
-    }
-
-
-    
-
-
-    function handle_submit() {
-        //first we're gonna build the url based on the selected sorts and filters
-        var questionmarkflag = 0;
-        var ajaxurl=`/user/petlistings/results/`;
-        if(selectedStatus !== 'Any'){
-            if(questionmarkflag === 0){
-                ajaxurl = ajaxurl + `?`;
-                questionmarkflag = 1;
-            }else{
-                ajaxurl = ajaxurl + `&`;
-            }
-            ajaxurl= ajaxurl + `status=${selectedStatus}`;
-        }
-        if(selectedBreed !== 'Any'){
-            if(questionmarkflag === 0){
-                ajaxurl = ajaxurl + `?`;
-                questionmarkflag = 1;
-            }else{
-                ajaxurl = ajaxurl + `&`;
-            }
-            ajaxurl= ajaxurl + `breed=${selectedBreed}`;
-        }
-        if(selectedAge !== 'Any'){
-            if(questionmarkflag === 0){
-                ajaxurl = ajaxurl + `?`;
-                questionmarkflag = 1;
-            }else{
-                ajaxurl = ajaxurl + `&`;
-            }
-            ajaxurl= ajaxurl + `age=${selectedAge}`;
-        }
-        if(selectedSort !== 'None'){
-            if(questionmarkflag === 0){
-                ajaxurl = ajaxurl + `?`;
-                questionmarkflag = 1;
-            }else{
-                ajaxurl = ajaxurl + `&`;;
-            }
-            ajaxurl= ajaxurl + `ordering=${selectedSort}`;
-        }
-
-
-        console.log(ajaxurl);
-
-
-        
-        ajax(ajaxurl, {     //for now can do /?page=2 to view the second page etc
-            method: "GET",
-            headers: headers,
-        })
-        .then(request => request.json())
-        .then(json => {
-            setResponse(json);
-            printListings(json);
-            })
-
-        }
-    
   return (
     <>
     <div>
@@ -187,9 +57,6 @@ const Search = () => {
             id='searchinput'
             
           />
-
-
-
           <div className="input-group-append">
             <a
               className="btn btn-danger btn-lg"
@@ -197,33 +64,25 @@ const Search = () => {
               id="search-button"
               onClick={() =>{
                 setSearch(document.getElementById('searchinput').value )
-                handle_submit();
-
-
               }}
             >
               Search
             </a>
           </div>
         </div>
-
-        {/**/}
     <div id="sortandfilter">
       <div className="buttonholder">
         <h2 className="display-6">Filters:</h2>
-
-
         <div className="dropdown">
           <a className="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown">
             Status
           </a>
-
           <ul className="dropdown-menu">
             <li>
               <a 
               className="dropdown-item" 
               onClick={() => {
-                setSelectedStatus('available');
+                setSelectedStatus('Available');
                 console.log('Selected Status:', selectedStatus);
                 }}
                 >Available
@@ -233,7 +92,7 @@ const Search = () => {
               <a 
               className="dropdown-item" 
               onClick={() => {
-                setSelectedStatus('pending');
+                setSelectedStatus('Pending');
                 console.log('Selected Status:', selectedStatus);
                 }}
                 >Pending
@@ -243,7 +102,7 @@ const Search = () => {
               <a 
               className="dropdown-item" 
               onClick={() => {
-                setSelectedStatus('adopted');
+                setSelectedStatus('Adopted');
                 console.log('Selected Status:', selectedStatus);
                 }}
                 >Adopted
@@ -263,8 +122,6 @@ const Search = () => {
           </ul>
           <h5 id='centredcardbody'>  {selectedStatus}</h5>
         </div>
-
-
         <div className="dropdown">
           <a className="btn btn-danger dropdown-toggle" role="button" data-bs-toggle="dropdown">
             Breed
@@ -332,20 +189,7 @@ const Search = () => {
           </div>
           </ul>
           <h5 id='centredcardbody'>  {selectedAge}</h5>
-        </div> 
-
-        
-
-
-
-
-        
-
-        
-
-        {/* Repeat the structure for other filters... */}
-
-        
+        </div>       
       </div>
 
       <div className="buttonholder">
@@ -393,41 +237,8 @@ const Search = () => {
         </div>
       </div>
     </div>
-        {/**/}
-
-
-
-
-      </div>
-
-      {/* The results div */}
-      <div className="container mt-4" name="results-placeholder" id='display'> 
-      
-      
-      </div>
-
-      <div id='paginationdiv' className='pag'>
-      <button
-        className='btn btn-danger'
-        onClick={() => {
-          setCurrentPage(currentPage - 1);
-          console.log(currentPage);
-          printListings(response);
-        }}
-        >Previous</button>
-
-        <button
-        className='btn btn-danger'
-        onClick={() => {
-          setCurrentPage(currentPage + 1);
-          console.log(currentPage);
-          printListings(response);
-        }}
-        >Next
-        </button>
-      </div>
-            
-      
+  </div>
+      <PetlistingPaginationComponent addedpets={[]} url={url} selectedStatus={selectedStatus} selectedBreed={selectedBreed} selectedAge={selectedAge} selectedSort={selectedSort} name={search}/>
 
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
