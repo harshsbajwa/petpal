@@ -28,3 +28,4 @@
 
 # Running on Ubuntu 20.04.6 environment. 
 
+# Alternatively, run the startup.sh in ./backend to install dependencies.
